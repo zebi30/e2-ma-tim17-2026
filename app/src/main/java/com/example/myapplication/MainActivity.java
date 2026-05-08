@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         setupLoginButtons();
         setupNotificationButtons();
         setupGameButtons();
+        setupProfileButton();
+    }
+
+    private void setupProfileButton() {
+        Button btnProfile = findViewById(R.id.btn_profile);
+        btnProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
     }
 
     private void setupLoginButtons() {

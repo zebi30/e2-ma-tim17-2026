@@ -130,4 +130,35 @@
     <string name="op_minus">-</string>
     <string name="op_mul">*</string>
     <string name="op_div">/</string>
+
+    <!-- Profile -->
+    <string name="section_profile">2. Prikaz profila</string>
+    <string name="main_btn_profile">Profil ekran</string>
+    <string name="profile">Profil</string>
+    <string name="change_avatar">Izmeni avatar</string>
+    <string name="logout">Odjava</string>
+    <string name="tokens_label">Tokeni</string>
+    <string name="stars_label">Zvezde</string>
+    <string name="league_label">Liga</string>
+    <string name="region_label">Region</string>
+    <string name="qr_code_label">QR kod</string>
+    <string name="qr_placeholder">[ QR ]</string>
+    <string name="avatar_placeholder">👤</string>
+    <string name="league_icon">🏆</string>
+    <string name="sample_username">Igrac123</string>
+    <string name="sample_email">igrac@email.com</string>
+    <string name="sample_tokens">5</string>
+    <string name="sample_stars">120</string>
+    <string name="sample_league">Bronzana liga</string>
+    <string name="sample_region">Vojvodina</string>
+    <string name="statistics">Statistika</string>
+    <string name="stat_avg_points">Prosečno bodova po igri: 25</string>
+    <string name="stat_kzz">Ko zna zna - tačno/netačno: 60% / 40%</string>
+    <string name="stat_moj_broj">Moj broj - pronađen broj: 70%</string>
+    <string name="stat_korak">Korak po korak - pogođen pojam po koraku: 50%</string>
+    <string name="stat_asocijacije">Asocijacije - rešene: 35%</string>
+    <string name="stat_skocko">Skočko - pogođena kombinacija: 45%</string>
+    <string name="stat_spojnice">Spojnice - tačno povezano: 80%</string>
+    <string name="stat_total_games">Ukupno odigranih partija: 42</string>
+    <string name="stat_win_loss">Pobede / Porazi: 60% / 40%</string>
 </resources>

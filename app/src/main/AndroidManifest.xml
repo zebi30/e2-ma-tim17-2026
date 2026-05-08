@@ -32,6 +32,9 @@
         <activity android:name=".MojBrojActivity" />
         <activity android:name=".SkockoActivity" />
 
+        <!-- Profile Activity -->
+        <activity android:name=".ProfileActivity" />
+
         <!-- Notifications Activity -->
         <activity android:name=".NotificationsActivity" />
 
