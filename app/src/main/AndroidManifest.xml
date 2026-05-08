@@ -20,6 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Login/Registration Activities -->
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".PasswordResetActivity" />
+        <activity android:name=".EmailVerificationActivity" />
+
+        <!-- Game Activities -->
+        <activity android:name=".KorakPoKorakActivity" />
+        <activity android:name=".MojBrojActivity" />
+        <activity android:name=".SkockoActivity" />
+
+        <!-- Notifications Activity -->
+        <activity android:name=".NotificationsActivity" />
+
     </application>
 
 </manifest>
