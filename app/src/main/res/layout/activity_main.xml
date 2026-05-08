@@ -172,6 +172,15 @@
             android:text="@string/main_btn_spojnice"
             android:textColor="@color/white"
             android:backgroundTint="@color/primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_asocijacije"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_asocijacije"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="32dp" />
 
     </LinearLayout>

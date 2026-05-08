@@ -33,6 +33,7 @@
         <activity android:name=".SkockoActivity" />
         <activity android:name=".KoZnaZnaActivity" />
         <activity android:name=".SpojniceActivity" />
+        <activity android:name=".AsocijacijeActivity" />
 
         <!-- Profile Activity -->
         <activity android:name=".ProfileActivity" />

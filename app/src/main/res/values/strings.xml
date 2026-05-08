@@ -188,4 +188,20 @@
     <string name="right_item_3">Ti si mi u krvi</string>
     <string name="right_item_4">Krug</string>
     <string name="right_item_5">Lipe cvatu</string>
+
+    <!-- Asocijacije -->
+    <string name="asocijacije">Asocijacije</string>
+    <string name="main_btn_asocijacije">Asocijacije</string>
+    <string name="time_2min">2:00</string>
+    <string name="col_a">A</string>
+    <string name="col_b">B</string>
+    <string name="col_c">C</string>
+    <string name="col_d">D</string>
+    <string name="final_solution_label">Konačno rešenje</string>
+    <string name="solution_a">Rešenje A</string>
+    <string name="solution_b">Rešenje B</string>
+    <string name="solution_c">Rešenje C</string>
+    <string name="solution_d">Rešenje D</string>
+    <string name="cell_hidden">?</string>
+    <string name="enter_solution">Unesite rešenje</string>
 </resources>

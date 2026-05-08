@@ -69,5 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSpojnice = findViewById(R.id.btn_spojnice);
         btnSpojnice.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SpojniceActivity.class)));
+
+        Button btnAsocijacije = findViewById(R.id.btn_asocijacije);
+        btnAsocijacije.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AsocijacijeActivity.class)));
     }
 }
