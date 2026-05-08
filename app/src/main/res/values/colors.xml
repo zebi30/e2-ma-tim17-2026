@@ -2,4 +2,27 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Colors -->
+    <color name="primary">#6C63FF</color>
+    <color name="primary_light">#8A84FF</color>
+    <color name="primary_dark">#5A52CC</color>
+
+    <!-- Accent Colors -->
+    <color name="accent">#FF6B6B</color>
+    <color name="success">#51CF66</color>
+    <color name="warning">#FFD93D</color>
+    <color name="error">#FF6B6B</color>
+
+    <!-- Neutral Colors -->
+    <color name="text_primary">#2C3E50</color>
+    <color name="text_secondary">#7F8C8D</color>
+    <color name="background_light">#F5F7FA</color>
+    <color name="background">#FFFFFF</color>
+    <color name="divider">#E0E0E0</color>
+
+    <!-- League Colors -->
+    <color name="league_gold">#FFD700</color>
+    <color name="league_silver">#C0C0C0</color>
+    <color name="league_bronze">#CD7F32</color>
 </resources>
