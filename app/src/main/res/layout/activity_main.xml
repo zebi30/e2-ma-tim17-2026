@@ -163,6 +163,15 @@
             android:text="@string/main_btn_ko_zna_zna"
             android:textColor="@color/white"
             android:backgroundTint="@color/primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_spojnice"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_spojnice"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="32dp" />
 
     </LinearLayout>

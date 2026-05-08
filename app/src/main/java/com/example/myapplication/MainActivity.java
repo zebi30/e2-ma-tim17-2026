@@ -66,5 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnKoZnaZna = findViewById(R.id.btn_ko_zna_zna);
         btnKoZnaZna.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, KoZnaZnaActivity.class)));
+
+        Button btnSpojnice = findViewById(R.id.btn_spojnice);
+        btnSpojnice.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SpojniceActivity.class)));
     }
 }

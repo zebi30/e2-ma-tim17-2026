@@ -174,4 +174,18 @@
     <string name="answer_b">B) Novi Sad</string>
     <string name="answer_c">C) Niš</string>
     <string name="answer_d">D) Subotica</string>
+
+    <!-- Spojnice -->
+    <string name="spojnice">Spojnice</string>
+    <string name="main_btn_spojnice">Spojnice</string>
+    <string name="left_item_1">Bajaga</string>
+    <string name="left_item_2">Riblja Čorba</string>
+    <string name="left_item_3">Zdravko Čolić</string>
+    <string name="left_item_4">EKV</string>
+    <string name="left_item_5">Bijelo Dugme</string>
+    <string name="right_item_1">Pozitivna geografija</string>
+    <string name="right_item_2">Lutka sa naslovne strane</string>
+    <string name="right_item_3">Ti si mi u krvi</string>
+    <string name="right_item_4">Krug</string>
+    <string name="right_item_5">Lipe cvatu</string>
 </resources>

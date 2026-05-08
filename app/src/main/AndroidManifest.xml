@@ -32,6 +32,7 @@
         <activity android:name=".MojBrojActivity" />
         <activity android:name=".SkockoActivity" />
         <activity android:name=".KoZnaZnaActivity" />
+        <activity android:name=".SpojniceActivity" />
 
         <!-- Profile Activity -->
         <activity android:name=".ProfileActivity" />
