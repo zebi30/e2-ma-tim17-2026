@@ -161,4 +161,17 @@
     <string name="stat_spojnice">Spojnice - tačno povezano: 80%</string>
     <string name="stat_total_games">Ukupno odigranih partija: 42</string>
     <string name="stat_win_loss">Pobede / Porazi: 60% / 40%</string>
+
+    <!-- Ko zna zna -->
+    <string name="section_games_2">4. Nove igre</string>
+    <string name="ko_zna_zna">Ko zna zna</string>
+    <string name="main_btn_ko_zna_zna">Ko zna zna</string>
+    <string name="time_5s">5s</string>
+    <string name="time_25s">25s</string>
+    <string name="question_progress_initial">Pitanje 1 / 5</string>
+    <string name="sample_question">Koja je glavni grad Srbije?</string>
+    <string name="answer_a">A) Beograd</string>
+    <string name="answer_b">B) Novi Sad</string>
+    <string name="answer_c">C) Niš</string>
+    <string name="answer_d">D) Subotica</string>
 </resources>

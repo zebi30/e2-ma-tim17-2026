@@ -63,5 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSkocko = findViewById(R.id.btn_skocko);
         btnSkocko.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SkockoActivity.class)));
+
+        Button btnKoZnaZna = findViewById(R.id.btn_ko_zna_zna);
+        btnKoZnaZna.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, KoZnaZnaActivity.class)));
     }
 }
