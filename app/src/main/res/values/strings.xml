@@ -130,4 +130,78 @@
     <string name="op_minus">-</string>
     <string name="op_mul">*</string>
     <string name="op_div">/</string>
+
+    <!-- Profile -->
+    <string name="section_profile">2. Prikaz profila</string>
+    <string name="main_btn_profile">Profil ekran</string>
+    <string name="profile">Profil</string>
+    <string name="change_avatar">Izmeni avatar</string>
+    <string name="logout">Odjava</string>
+    <string name="tokens_label">Tokeni</string>
+    <string name="stars_label">Zvezde</string>
+    <string name="league_label">Liga</string>
+    <string name="region_label">Region</string>
+    <string name="qr_code_label">QR kod</string>
+    <string name="qr_placeholder">[ QR ]</string>
+    <string name="avatar_placeholder">👤</string>
+    <string name="league_icon">🏆</string>
+    <string name="sample_username">Igrac123</string>
+    <string name="sample_email">igrac@email.com</string>
+    <string name="sample_tokens">5</string>
+    <string name="sample_stars">120</string>
+    <string name="sample_league">Bronzana liga</string>
+    <string name="sample_region">Vojvodina</string>
+    <string name="statistics">Statistika</string>
+    <string name="stat_avg_points">Prosečno bodova po igri: 25</string>
+    <string name="stat_kzz">Ko zna zna - tačno/netačno: 60% / 40%</string>
+    <string name="stat_moj_broj">Moj broj - pronađen broj: 70%</string>
+    <string name="stat_korak">Korak po korak - pogođen pojam po koraku: 50%</string>
+    <string name="stat_asocijacije">Asocijacije - rešene: 35%</string>
+    <string name="stat_skocko">Skočko - pogođena kombinacija: 45%</string>
+    <string name="stat_spojnice">Spojnice - tačno povezano: 80%</string>
+    <string name="stat_total_games">Ukupno odigranih partija: 42</string>
+    <string name="stat_win_loss">Pobede / Porazi: 60% / 40%</string>
+
+    <!-- Ko zna zna -->
+    <string name="section_games_2">4. Nove igre</string>
+    <string name="ko_zna_zna">Ko zna zna</string>
+    <string name="main_btn_ko_zna_zna">Ko zna zna</string>
+    <string name="time_5s">5s</string>
+    <string name="time_25s">25s</string>
+    <string name="question_progress_initial">Pitanje 1 / 5</string>
+    <string name="sample_question">Koja je glavni grad Srbije?</string>
+    <string name="answer_a">A) Beograd</string>
+    <string name="answer_b">B) Novi Sad</string>
+    <string name="answer_c">C) Niš</string>
+    <string name="answer_d">D) Subotica</string>
+
+    <!-- Spojnice -->
+    <string name="spojnice">Spojnice</string>
+    <string name="main_btn_spojnice">Spojnice</string>
+    <string name="left_item_1">Bajaga</string>
+    <string name="left_item_2">Riblja Čorba</string>
+    <string name="left_item_3">Zdravko Čolić</string>
+    <string name="left_item_4">EKV</string>
+    <string name="left_item_5">Bijelo Dugme</string>
+    <string name="right_item_1">Pozitivna geografija</string>
+    <string name="right_item_2">Lutka sa naslovne strane</string>
+    <string name="right_item_3">Ti si mi u krvi</string>
+    <string name="right_item_4">Krug</string>
+    <string name="right_item_5">Lipe cvatu</string>
+
+    <!-- Asocijacije -->
+    <string name="asocijacije">Asocijacije</string>
+    <string name="main_btn_asocijacije">Asocijacije</string>
+    <string name="time_2min">2:00</string>
+    <string name="col_a">A</string>
+    <string name="col_b">B</string>
+    <string name="col_c">C</string>
+    <string name="col_d">D</string>
+    <string name="final_solution_label">Konačno rešenje</string>
+    <string name="solution_a">Rešenje A</string>
+    <string name="solution_b">Rešenje B</string>
+    <string name="solution_c">Rešenje C</string>
+    <string name="solution_d">Rešenje D</string>
+    <string name="cell_hidden">?</string>
+    <string name="enter_solution">Unesite rešenje</string>
 </resources>

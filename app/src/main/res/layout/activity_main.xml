@@ -78,6 +78,26 @@
             android:backgroundTint="@color/primary"
             android:layout_marginBottom="16dp" />
 
+        <!-- Profile Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_profile"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_profile"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_profile"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            android:layout_marginBottom="16dp" />
+
         <!-- Notifications Section -->
         <TextView
             android:layout_width="match_parent"
@@ -132,6 +152,33 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="@string/main_btn_skocko"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_ko_zna_zna"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_ko_zna_zna"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_spojnice"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_spojnice"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_asocijacije"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/main_btn_asocijacije"
             android:textColor="@color/white"
             android:backgroundTint="@color/primary"
             android:layout_marginBottom="32dp" />

@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         setupLoginButtons();
         setupNotificationButtons();
         setupGameButtons();
+        setupProfileButton();
+    }
+
+    private void setupProfileButton() {
+        Button btnProfile = findViewById(R.id.btn_profile);
+        btnProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
     }
 
     private void setupLoginButtons() {
@@ -57,5 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnSkocko = findViewById(R.id.btn_skocko);
         btnSkocko.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SkockoActivity.class)));
+
+        Button btnKoZnaZna = findViewById(R.id.btn_ko_zna_zna);
+        btnKoZnaZna.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, KoZnaZnaActivity.class)));
+
+        Button btnSpojnice = findViewById(R.id.btn_spojnice);
+        btnSpojnice.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SpojniceActivity.class)));
+
+        Button btnAsocijacije = findViewById(R.id.btn_asocijacije);
+        btnAsocijacije.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AsocijacijeActivity.class)));
     }
 }
