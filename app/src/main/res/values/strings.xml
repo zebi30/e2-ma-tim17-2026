@@ -204,4 +204,92 @@
     <string name="solution_d">Rešenje D</string>
     <string name="cell_hidden">?</string>
     <string name="enter_solution">Unesite rešenje</string>
+
+    <!-- Game flow / feedback (KT2) -->
+    <string name="correct">Tačno!</string>
+    <string name="incorrect">Netačno!</string>
+    <string name="time_up">Isteklo vreme!</string>
+    <string name="game_over_title">Kraj igre</string>
+    <string name="total_score">Ukupno poena: %d</string>
+    <string name="play_again">Igraj ponovo</string>
+    <string name="exit">Izađi</string>
+    <string name="time_seconds">%ds</string>
+    <string name="question_progress">Pitanje %1$d / %2$d</string>
+    <string name="round_label">Runda %1$d / %2$d</string>
+
+    <!-- Spojnice -->
+    <string name="spojnice_instruction">Poveži pojam iz leve sa pojmom iz desne kolone</string>
+
+    <!-- Asocijacije -->
+    <string name="guess_column">Pogodi rešenje kolone %s</string>
+    <string name="guess_final">Pogodi konačno rešenje</string>
+    <string name="empty_guess">Unesite rešenje</string>
+    <string name="solved">Rešeno!</string>
+
+    <!-- KT2: igra protiv protivnika -->
+    <string name="you_score_label">Ti:</string>
+    <string name="opponent_score_label">Protivnik:</string>
+    <string name="round_value_initial">Runda 1 / 2</string>
+    <string name="turn_player">Tvoj potez</string>
+    <string name="turn_opponent">Potez protivnika</string>
+    <string name="result_win">Pobedio si!</string>
+    <string name="result_loss">Izgubio si</string>
+    <string name="result_draw">Nerešeno</string>
+    <string name="final_score_fmt">Ti: %1$d — Protivnik: %2$d</string>
+
+    <!-- KT2: Ko zna zna feedback -->
+    <string name="opponent_answered">Protivnik je odgovorio…</string>
+    <string name="fb_player_correct_faster">Tačno! Bio si brži (+10)</string>
+    <string name="fb_player_correct_slower">Tačno, ali protivnik je bio brži (0)</string>
+    <string name="fb_player_correct">Tačno! (+10)</string>
+    <string name="fb_player_wrong">Netačno (-5)</string>
+    <string name="fb_no_answer">Nisi odgovorio (0)</string>
+    <string name="fb_opp_correct">Protivnik je odgovorio tačno (+10)</string>
+    <string name="fb_opp_correct_slower">Protivnik je odgovorio tačno, ali sporije (0)</string>
+    <string name="fb_opp_wrong">Protivnik je odgovorio netačno (-5)</string>
+    <string name="fb_opp_none">Protivnik nije odgovorio</string>
+
+    <!-- KT2: Spojnice faze -->
+    <string name="spojnice_your_round">Tvoja runda — poveži pojmove</string>
+    <string name="spojnice_opponent_cleanup">Protivnik povezuje preostalo</string>
+    <string name="spojnice_opponent_round">Protivnikova runda</string>
+    <string name="spojnice_your_cleanup">Tvoja šansa — poveži preostalo</string>
+
+    <!-- KT2: Asocijacije potezi -->
+    <string name="pass_turn">Predaj potez</string>
+    <string name="asoc_already_opened">Već si otvorio polje — pogađaj ili predaj potez</string>
+    <string name="asoc_open_field_first">Prvo otvori jedno polje</string>
+    <string name="asoc_wrong_turn_passes">Netačno — potez prelazi protivniku</string>
+    <string name="asoc_opp_solved_column">Protivnik je rešio kolonu %1$s</string>
+    <string name="asoc_opp_wrong">Protivnik je pogrešio — tvoj potez</string>
+    <string name="asoc_opp_solved_final">Protivnik je pogodio konačno rešenje!</string>
+    <string name="asoc_round_done">Runda %1$d završena</string>
+    <string name="asoc_final_was">Konačno rešenje: %1$s</string>
+
+    <!-- KT2: Profil -->
+    <string name="choose_avatar">Izaberi avatar</string>
+    <string name="avatar_changed">Avatar je promenjen</string>
+    <string name="logged_out">Odjavljen si</string>
+    <string name="league_0">Nulta liga</string>
+    <string name="league_1">Bronzana liga</string>
+    <string name="league_2">Srebrna liga</string>
+    <string name="league_3">Zlatna liga</string>
+    <string name="league_4">Platinasta liga</string>
+    <string name="league_5">Dijamantska liga</string>
+
+    <!-- KT2: Statistika profila -->
+    <string name="stat_avg_fmt">Prosečni bodovi — %1$s</string>
+    <string name="stat_avg_no_data">Prosečni bodovi — nema podataka</string>
+    <string name="stat_kzz_fmt">Ko zna zna — tačno/netačno: %1$d%% / %2$d%%</string>
+    <string name="stat_kzz_no_data">Ko zna zna — nema podataka</string>
+    <string name="stat_moj_broj_na">Moj broj — nema podataka</string>
+    <string name="stat_korak_na">Korak po korak — nema podataka</string>
+    <string name="stat_skocko_na">Skočko — nema podataka</string>
+    <string name="stat_asocijacije_fmt">Asocijacije — rešene/nerešene: %1$d / %2$d</string>
+    <string name="stat_asocijacije_no_data">Asocijacije — nema podataka</string>
+    <string name="stat_spojnice_fmt">Spojnice — uspešno povezano: %1$d%%</string>
+    <string name="stat_spojnice_no_data">Spojnice — nema podataka</string>
+    <string name="stat_total_games_fmt">Ukupno odigranih partija: %1$d</string>
+    <string name="stat_win_loss_fmt">Pobede / Porazi: %1$d%% / %2$d%%</string>
+    <string name="stat_win_loss_no_data">Pobede / Porazi — nema podataka</string>
 </resources>
