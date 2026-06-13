@@ -16,6 +16,7 @@ import com.example.myapplication.data.UserRepository;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.Random;
 
@@ -109,6 +110,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
     private int opponentScore = 0;
     private int lastPoints = 0;
     private boolean finished = false;
+    private boolean playerSolvedOwnRound = false;
     private Puzzle puzzle;
 
     private final Random random = new Random();
@@ -122,6 +124,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         setContentView(R.layout.activity_korak_po_korak);
         userRepository = new UserRepository(this);
         resultRepository = new GameResultRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         Button quit = findViewById(R.id.quit_button);
         statusText = findViewById(R.id.status_text);
@@ -199,6 +202,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         if (guess.equals(puzzle.word.toLowerCase())) {
             lastPoints = pointsForStep(stepIndex + 1);
             playerScore += lastPoints;
+            playerSolvedOwnRound = true;
             scoreValue.setText(String.valueOf(playerScore));
             playerRoundEnded(true);
         } else {
@@ -313,7 +317,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         User user = userRepository.getCurrentUser();
         if (user != null) {
             resultRepository.insert(new GameResult(user.id, GameResult.GAME_KORAK_PO_KORAK, playerScore,
-                    opponentScore, won, playerScore, opponentScore, System.currentTimeMillis()));
+                    opponentScore, won, playerSolvedOwnRound ? 1 : 0, 1, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)

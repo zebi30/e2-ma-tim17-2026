@@ -21,6 +21,7 @@ import com.example.myapplication.data.UserRepository;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -52,6 +53,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private int opponentScore = 0;
     private boolean finished = false;
     private Integer playerResult = null;
+    private int playerExactRounds = 0;
 
     private final StringBuilder expression = new StringBuilder();
     private final Random random = new Random();
@@ -82,6 +84,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.activity_moj_broj);
         userRepository = new UserRepository(this);
         resultRepository = new GameResultRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         timerView = findViewById(R.id.timer);
         targetView = findViewById(R.id.target_number);
@@ -216,6 +219,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     /** Applies the spec scoring for one round and returns a short summary note. */
     private String scoreRound(boolean playerOwnsRound) {
         boolean playerExact = playerResult != null && playerResult == target;
+        if (playerExact) playerExactRounds++;
         int playerDist = playerResult == null ? Integer.MAX_VALUE : Math.abs(target - playerResult);
         boolean botExact = bot.mojBrojReachesTarget();
         int botDist = botExact ? 0 : bot.mojBrojDistance();
@@ -257,7 +261,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         User user = userRepository.getCurrentUser();
         if (user != null) {
             resultRepository.insert(new GameResult(user.id, GameResult.GAME_MOJ_BROJ, playerScore, opponentScore,
-                    won, playerScore, opponentScore, System.currentTimeMillis()));
+                    won, playerExactRounds, 2, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)
