@@ -16,6 +16,7 @@ import com.example.myapplication.data.UserRepository;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.Random;
 
@@ -123,6 +124,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         setContentView(R.layout.activity_korak_po_korak);
         userRepository = new UserRepository(this);
         resultRepository = new GameResultRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         Button quit = findViewById(R.id.quit_button);
         statusText = findViewById(R.id.status_text);

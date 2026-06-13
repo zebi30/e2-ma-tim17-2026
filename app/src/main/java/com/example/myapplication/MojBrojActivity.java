@@ -21,6 +21,7 @@ import com.example.myapplication.data.UserRepository;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -83,6 +84,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.activity_moj_broj);
         userRepository = new UserRepository(this);
         resultRepository = new GameResultRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         timerView = findViewById(R.id.timer);
         targetView = findViewById(R.id.target_number);

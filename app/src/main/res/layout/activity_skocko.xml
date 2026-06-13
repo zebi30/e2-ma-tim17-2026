@@ -77,6 +77,8 @@
 
     </RelativeLayout>
 
+    <include layout="@layout/view_player_bar" />
+
     <!-- Game Content -->
     <ScrollView
         android:layout_width="match_parent"
