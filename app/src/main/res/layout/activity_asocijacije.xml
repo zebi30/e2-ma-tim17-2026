@@ -57,6 +57,31 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Runda i potez -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/round_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/round_value_initial"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/turn_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
     <!-- Grid: 4 columns x (4 cells + solution) -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -360,13 +385,31 @@
                 android:padding="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/submit_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/submit"
-            android:textColor="@color/primary"
-            android:backgroundTint="@color/background_light" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:text="@string/submit"
+                android:textColor="@color/primary"
+                android:backgroundTint="@color/background_light" />
+
+            <Button
+                android:id="@+id/pass_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:text="@string/pass_turn"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/warning" />
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Score -->
@@ -381,12 +424,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/score_label"
+            android:text="@string/you_score_label"
             android:textSize="16sp"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score_zero"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/warning"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/opponent_score_label"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="24dp" />
+
+        <TextView
+            android:id="@+id/opponent_score_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score_zero"
