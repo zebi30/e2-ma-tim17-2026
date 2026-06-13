@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AppDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "slagalica.db";
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 6;
 
     public static final String T_USERS = "users";
     public static final String T_QUESTIONS = "questions";
@@ -92,6 +92,21 @@ public class AppDbHelper extends SQLiteOpenHelper {
         seedQuestions(db);
         seedSpojnice(db);
         seedAsocijacije(db);
+        seedTestUser(db);
+    }
+
+    /** Verifikovan test korisnik za prijavu bez email-a: demo / demo. */
+    private void seedTestUser(SQLiteDatabase db) {
+        ContentValues v = new ContentValues();
+        v.put("username", "demo");
+        v.put("email", "demo@demo.com");
+        v.put("region", "Vojvodina");
+        v.put("password", "demo");
+        v.put("verified", 1);
+        v.put("avatar", 0);
+        v.put("tokens", 5);
+        v.put("stars", 120);
+        db.insert(T_USERS, null, v);
     }
 
     @Override
