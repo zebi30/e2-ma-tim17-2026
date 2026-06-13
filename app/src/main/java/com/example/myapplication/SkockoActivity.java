@@ -50,6 +50,7 @@ public class SkockoActivity extends AppCompatActivity {
     private int opponentScore = 0;
     private int lastPoints = 0;
     private boolean finished = false;
+    private boolean playerSolvedOwnRound = false;
 
     private final Random random = new Random();
     private final BotOpponent bot = new BotOpponent();
@@ -154,6 +155,7 @@ public class SkockoActivity extends AppCompatActivity {
         if (exact == LENGTH) {
             lastPoints = pointsForAttempt(currentAttempt + 1);
             playerScore += lastPoints;
+            playerSolvedOwnRound = true;
             scoreView.setText(String.valueOf(playerScore));
             playerRoundEnded(true);
             return;
@@ -384,7 +386,7 @@ public class SkockoActivity extends AppCompatActivity {
         User user = userRepository.getCurrentUser();
         if (user != null) {
             resultRepository.insert(new GameResult(user.id, GameResult.GAME_SKOCKO, playerScore, opponentScore,
-                    won, playerScore, opponentScore, System.currentTimeMillis()));
+                    won, playerSolvedOwnRound ? 1 : 0, 1, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)

@@ -122,9 +122,20 @@ public class ProfileActivity extends AppCompatActivity {
                 : getString(R.string.stat_kzz_fmt,
                 percent(stats.kzzCorrect, kzzTotal), percent(stats.kzzWrong, kzzTotal)));
 
-        setText(R.id.stat_moj_broj_value, getString(R.string.stat_moj_broj_na));
-        setText(R.id.stat_korak_value, getString(R.string.stat_korak_na));
-        setText(R.id.stat_skocko_value, getString(R.string.stat_skocko_na));
+        setText(R.id.stat_moj_broj_value, stats.mojBrojRounds == 0
+                ? getString(R.string.stat_moj_broj_na)
+                : getString(R.string.stat_moj_broj_fmt,
+                percent(stats.mojBrojExact, stats.mojBrojRounds)));
+
+        setText(R.id.stat_korak_value, stats.korakRounds == 0
+                ? getString(R.string.stat_korak_na)
+                : getString(R.string.stat_korak_fmt,
+                percent(stats.korakSolved, stats.korakRounds)));
+
+        setText(R.id.stat_skocko_value, stats.skockoRounds == 0
+                ? getString(R.string.stat_skocko_na)
+                : getString(R.string.stat_skocko_fmt,
+                percent(stats.skockoSolved, stats.skockoRounds)));
 
         setText(R.id.stat_asocijacije_value, stats.asocTotalRounds == 0
                 ? getString(R.string.stat_asocijacije_no_data)

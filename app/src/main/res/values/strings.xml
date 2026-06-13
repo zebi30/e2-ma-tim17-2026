@@ -379,8 +379,11 @@
     <string name="stat_kzz_fmt">Ko zna zna — tačno/netačno: %1$d%% / %2$d%%</string>
     <string name="stat_kzz_no_data">Ko zna zna — nema podataka</string>
     <string name="stat_moj_broj_na">Moj broj — nema podataka</string>
+    <string name="stat_moj_broj_fmt">Moj broj — tačan broj pronađen: %1$d%%</string>
     <string name="stat_korak_na">Korak po korak — nema podataka</string>
+    <string name="stat_korak_fmt">Korak po korak — pogođen pojam: %1$d%%</string>
     <string name="stat_skocko_na">Skočko — nema podataka</string>
+    <string name="stat_skocko_fmt">Skočko — pogođena kombinacija: %1$d%%</string>
     <string name="stat_asocijacije_fmt">Asocijacije — rešene/nerešene: %1$d / %2$d</string>
     <string name="stat_asocijacije_no_data">Asocijacije — nema podataka</string>
     <string name="stat_spojnice_fmt">Spojnice — uspešno povezano: %1$d%%</string>

@@ -109,6 +109,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
     private int opponentScore = 0;
     private int lastPoints = 0;
     private boolean finished = false;
+    private boolean playerSolvedOwnRound = false;
     private Puzzle puzzle;
 
     private final Random random = new Random();
@@ -199,6 +200,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         if (guess.equals(puzzle.word.toLowerCase())) {
             lastPoints = pointsForStep(stepIndex + 1);
             playerScore += lastPoints;
+            playerSolvedOwnRound = true;
             scoreValue.setText(String.valueOf(playerScore));
             playerRoundEnded(true);
         } else {
@@ -313,7 +315,7 @@ public class KorakPoKorakActivity extends AppCompatActivity {
         User user = userRepository.getCurrentUser();
         if (user != null) {
             resultRepository.insert(new GameResult(user.id, GameResult.GAME_KORAK_PO_KORAK, playerScore,
-                    opponentScore, won, playerScore, opponentScore, System.currentTimeMillis()));
+                    opponentScore, won, playerSolvedOwnRound ? 1 : 0, 1, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)

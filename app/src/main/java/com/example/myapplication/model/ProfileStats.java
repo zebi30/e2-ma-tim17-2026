@@ -14,6 +14,15 @@ public class ProfileStats {
     public int asocSolvedRounds;
     public int asocTotalRounds;
 
+    public int mojBrojExact;
+    public int mojBrojRounds;
+
+    public int korakSolved;
+    public int korakRounds;
+
+    public int skockoSolved;
+    public int skockoRounds;
+
     public int totalGames;
     public int wins;
 }
