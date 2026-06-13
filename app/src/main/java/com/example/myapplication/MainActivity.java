@@ -10,43 +10,42 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.myapplication.data.SessionManager;
+
 public class MainActivity extends AppCompatActivity {
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        sessionManager = new SessionManager(this);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Setup button listeners
-        setupLoginButtons();
+        if (!sessionManager.isLoggedIn()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
         setupNotificationButtons();
         setupGameButtons();
-        setupProfileButton();
     }
 
-    private void setupProfileButton() {
-        Button btnProfile = findViewById(R.id.btn_profile);
-        btnProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
-    }
-
-    private void setupLoginButtons() {
-        Button btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
-
-        Button btnRegister = findViewById(R.id.btn_register);
-        btnRegister.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class)));
-
-        Button btnPasswordReset = findViewById(R.id.btn_password_reset);
-        btnPasswordReset.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PasswordResetActivity.class)));
-
-        Button btnEmailVerification = findViewById(R.id.btn_email_verification);
-        btnEmailVerification.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, EmailVerificationActivity.class)));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!sessionManager.isLoggedIn()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 
     private void setupNotificationButtons() {
@@ -72,5 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAsocijacije = findViewById(R.id.btn_asocijacije);
         btnAsocijacije.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AsocijacijeActivity.class)));
+
+        Button btnProfile = findViewById(R.id.btn_profile);
+        btnProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
     }
 }

@@ -6,185 +6,192 @@
     android:orientation="vertical"
     android:background="@color/primary">
 
-    <!-- Header with Timer and Score -->
-    <LinearLayout
+    <!-- Header: quit | remaining time (center) | score -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
         <Button
             android:id="@+id/quit_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:text="@string/close_symbol"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textColor="@color/white"
             android:background="?attr/selectableItemBackground" />
-
-        <TextView
-            android:id="@+id/game_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/korak_po_korak"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:gravity="end">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/time_label"
-                android:textSize="12sp"
-                android:textColor="@color/white" />
+                android:text="@string/remaining_time_label"
+                android:textSize="11sp"
+                android:textColor="@color/background_light" />
 
             <TextView
                 android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_70s"
-                android:textSize="18sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/white" />
-
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/header_chip"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score_label"
+                android:textSize="10sp"
+                android:textColor="@color/background_light" />
+
+            <TextView
+                android:id="@+id/score_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score_zero"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/warning" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <!-- Game Content -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center">
+        android:background="@color/background_light"
+        android:clipToPadding="false"
+        android:padding="20dp">
 
-        <!-- Step Number -->
-        <TextView
-            android:id="@+id/step_number"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/step_initial"
-            android:textSize="18sp"
-            android:textColor="@color/background_light"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:orientation="vertical">
 
-        <!-- Hint Display -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/background"
-            android:layout_marginBottom="32dp">
-
-            <LinearLayout
+            <!-- Round / phase banner -->
+            <TextView
+                android:id="@+id/status_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:text="@string/your_round"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@color/background"
+                android:layout_marginBottom="12dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hint"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="8dp" />
+            <!-- Step Number -->
+            <TextView
+                android:id="@+id/step_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/step_initial"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:gravity="center"
+                android:layout_marginBottom="20dp" />
 
-                <TextView
-                    android:id="@+id/hint_text"
+            <!-- Hint Display -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/hint_placeholder"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary" />
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:padding="20dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="10dp" />
 
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/hint_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_placeholder"
+                        android:textSize="18sp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:textColor="@color/text_primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <!-- Guess Input -->
+            <!-- Guess Input -->
             <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/guess_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="@string/enter_guess"
-                android:inputType="text"
-                android:textColor="@color/text_primary" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/guess_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="52dp"
+                    android:hint="@string/enter_guess"
+                    android:inputType="text"
+                    android:textColor="@color/text_primary" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Submit Button -->
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/submit"
-            android:textSize="16sp"
-            android:textColor="@color/primary"
-            android:backgroundTint="@color/background_light"
-            android:layout_marginBottom="16dp" />
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="@string/submit"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/success"
+                android:layout_marginBottom="12dp" />
 
-        <!-- Pass Button -->
-        <Button
-            android:id="@+id/pass_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+            <!-- Pass Button -->
+            <Button
+                android:id="@+id/pass_button"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
                 android:text="@string/pass"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary_dark" />
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary_dark" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <!-- Score Display -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="@color/primary_dark">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score_label"
-            android:textSize="16sp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/score_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score_zero"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/warning"
-            android:layout_marginStart="8dp" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
-
-
-
-
-

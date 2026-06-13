@@ -1,187 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background_light"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
-        <!-- App Title -->
-        <TextView
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            android:gravity="center"
-            android:layout_marginBottom="32dp" />
+            android:orientation="vertical"
+            android:background="@drawable/header_gradient"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="28dp"
+            android:gravity="center">
 
-        <!-- KT1 Test Menu -->
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/kt1_gui_test"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <!-- Authorization Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/section_auth"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            <!-- Profile + Notifications Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_login"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:padding="16dp">
 
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_register"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/section_profile_notif"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
 
-        <Button
-            android:id="@+id/btn_password_reset"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_password_reset"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_profile"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_email_verification"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_email_verification"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="16dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_notifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_notifications"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <!-- Profile Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/section_profile"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            <!-- Games Section (all games merged) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="24dp">
 
-        <Button
-            android:id="@+id/btn_profile"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_profile"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="16dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:padding="16dp">
 
-        <!-- Notifications Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/section_notifications"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/section_games"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
 
-        <Button
-            android:id="@+id/btn_notifications"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_notifications"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="16dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_korak_po_korak"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_korak"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <!-- Games Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/section_games"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_moj_broj"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_moj_broj"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_korak_po_korak"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_korak"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_skocko"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_skocko"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_moj_broj"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_moj_broj"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_ko_zna_zna"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_ko_zna_zna"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_skocko"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_skocko"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_spojnice"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_spojnice"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
+                        android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_ko_zna_zna"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_ko_zna_zna"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_asocijacije"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/main_btn_asocijacije"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/btn_spojnice"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_spojnice"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_asocijacije"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/main_btn_asocijacije"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            android:layout_marginBottom="32dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
