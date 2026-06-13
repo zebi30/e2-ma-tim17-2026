@@ -20,7 +20,15 @@ public class UserRepository {
     /** Vraća trenutno ulogovanog korisnika ili null ako niko nije ulogovan. */
     public User getCurrentUser() {
         long id = session.getUserId();
-        return id > 0 ? findById(id) : null;
+        if (id <= 0) {
+            return null;
+        }
+        User user = findById(id);
+        if (user == null) {
+            // Sesija pokazuje na korisnika koji više ne postoji (npr. posle reseed-a baze) — očisti je.
+            session.clear();
+        }
+        return user;
     }
 
     public long getCurrentUserId() {

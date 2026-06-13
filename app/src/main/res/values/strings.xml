@@ -348,6 +348,11 @@
     <!-- Traka sa statusom igrača (tokeni/zvezde/liga) tokom igre -->
     <string name="player_bar_tokens_fmt">🪙 %1$d</string>
     <string name="player_bar_stars_fmt">⭐ %1$d</string>
+    <!-- Gost (neregistrovan) nema ove vrednosti -->
+    <string name="player_bar_tokens_dash">🪙 —</string>
+    <string name="player_bar_stars_dash">⭐ —</string>
+    <string name="player_bar_league_dash">—</string>
+    <string name="login_required_feature">Prijavite se da biste pristupili ovoj funkciji</string>
     <string name="asoc_already_opened">Već si otvorio polje — pogađaj ili predaj potez</string>
     <string name="asoc_open_field_first">Prvo otvori jedno polje</string>
     <string name="asoc_wrong_turn_passes">Netačno — potez prelazi protivniku</string>

@@ -25,14 +25,23 @@ public final class PlayerBar {
     }
 
     public static void bind(Activity activity, User user) {
-        ((TextView) activity.findViewById(R.id.player_bar_tokens))
-                .setText(activity.getString(R.string.player_bar_tokens_fmt, user.tokens));
-        ((TextView) activity.findViewById(R.id.player_bar_stars))
-                .setText(activity.getString(R.string.player_bar_stars_fmt, user.stars));
+        TextView tokensView = activity.findViewById(R.id.player_bar_tokens);
+        TextView starsView = activity.findViewById(R.id.player_bar_stars);
+        TextView leagueView = activity.findViewById(R.id.player_bar_league);
+
+        if (user == null) {
+            // Gost (neregistrovan igrač) nema tokene/zvezde/ligu — prikaži crtice.
+            tokensView.setText(R.string.player_bar_tokens_dash);
+            starsView.setText(R.string.player_bar_stars_dash);
+            leagueView.setText(R.string.player_bar_league_dash);
+            return;
+        }
+
+        tokensView.setText(activity.getString(R.string.player_bar_tokens_fmt, user.tokens));
+        starsView.setText(activity.getString(R.string.player_bar_stars_fmt, user.stars));
 
         int leagueIndex = LeagueService.leagueIndexForStars(user.stars);
-        ((TextView) activity.findViewById(R.id.player_bar_league)).setText(String.format(
-                Locale.getDefault(), "%s %s",
+        leagueView.setText(String.format(Locale.getDefault(), "%s %s",
                 LEAGUE_ICONS[leagueIndex], activity.getString(LEAGUE_NAMES[leagueIndex])));
     }
 }
