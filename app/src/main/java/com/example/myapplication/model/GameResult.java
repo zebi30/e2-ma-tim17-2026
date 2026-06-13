@@ -4,6 +4,9 @@ public class GameResult {
     public static final String GAME_KO_ZNA_ZNA = "KO_ZNA_ZNA";
     public static final String GAME_SPOJNICE = "SPOJNICE";
     public static final String GAME_ASOCIJACIJE = "ASOCIJACIJE";
+    public static final String GAME_KORAK_PO_KORAK = "KORAK_PO_KORAK";
+    public static final String GAME_MOJ_BROJ = "MOJ_BROJ";
+    public static final String GAME_SKOCKO = "SKOCKO";
 
     public final long userId;
     public final String game;

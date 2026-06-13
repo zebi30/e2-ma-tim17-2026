@@ -17,22 +17,15 @@ public class UserRepository {
         session = new SessionManager(context);
     }
 
-    /**
-     * Vraća trenutno ulogovanog korisnika. Dok registracija/logovanje (Student 1)
-     * ne budu povezani sa bazom, pri prvom pozivu kreira se lokalni demo nalog.
-     */
+    /** Vraća trenutno ulogovanog korisnika ili null ako niko nije ulogovan. */
     public User getCurrentUser() {
         long id = session.getUserId();
-        User user = id > 0 ? findById(id) : null;
-        if (user == null) {
-            user = createDemoUser();
-            session.setUserId(user.id);
-        }
-        return user;
+        return id > 0 ? findById(id) : null;
     }
 
     public long getCurrentUserId() {
-        return getCurrentUser().id;
+        User current = getCurrentUser();
+        return current != null ? current.id : -1;
     }
 
     public void updateAvatar(long userId, int avatarIndex) {
@@ -42,8 +35,143 @@ public class UserRepository {
                 new String[]{String.valueOf(userId)});
     }
 
+    public User register(String username, String email, String region, String password) {
+        if (findByUsernameOrEmail(username) != null || findByUsernameOrEmail(email) != null) {
+            return null;
+        }
+        String verificationCode = generateVerificationCode(email);
+        ContentValues v = new ContentValues();
+        v.put("username", username);
+        v.put("email", email);
+        v.put("region", region);
+        v.put("password", password);
+        v.put("verified", 0);
+        v.put("verification_code", verificationCode);
+        v.put("avatar", 0);
+        v.put("tokens", 5);
+        v.put("stars", 0);
+        long id = helper.getWritableDatabase().insert(AppDbHelper.T_USERS, null, v);
+        return id > 0 ? new User(id, username, email, region, 0, 5, 0) : null;
+    }
+
+    public User login(String identifier, String password) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery(
+                "SELECT id, username, email, region, avatar, tokens, stars, password, verified FROM " + AppDbHelper.T_USERS
+                        + " WHERE username = ? OR email = ?",
+                new String[]{identifier, identifier})) {
+            if (!c.moveToFirst()) {
+                return null;
+            }
+            String storedPassword = c.getString(c.getColumnIndexOrThrow("password"));
+            int verified = c.getInt(c.getColumnIndexOrThrow("verified"));
+            if (!storedPassword.equals(password) || verified == 0) {
+                return null;
+            }
+            User user = readUser(c);
+            session.setUserId(user.id);
+            return user;
+        }
+    }
+
+    public boolean accountExists(String identifier) {
+        return findByUsernameOrEmail(identifier) != null;
+    }
+
+    public boolean isVerified(String identifier) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery(
+                "SELECT verified FROM " + AppDbHelper.T_USERS + " WHERE username = ? OR email = ?",
+                new String[]{identifier, identifier})) {
+            return c.moveToFirst() && c.getInt(0) == 1;
+        }
+    }
+
+    public String getEmailForIdentifier(String identifier) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery(
+                "SELECT email FROM " + AppDbHelper.T_USERS + " WHERE username = ? OR email = ?",
+                new String[]{identifier, identifier})) {
+            return c.moveToFirst() ? c.getString(0) : null;
+        }
+    }
+
+    public String getVerificationCode(String identifier) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery(
+                "SELECT verification_code FROM " + AppDbHelper.T_USERS + " WHERE username = ? OR email = ?",
+                new String[]{identifier, identifier})) {
+            return c.moveToFirst() ? c.getString(0) : null;
+        }
+    }
+
+    public boolean verifyEmail(String identifier, String code) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery(
+                "SELECT id, verification_code, verified FROM " + AppDbHelper.T_USERS + " WHERE username = ? OR email = ?",
+                new String[]{identifier, identifier})) {
+            if (!c.moveToFirst() || c.getInt(c.getColumnIndexOrThrow("verified")) == 1) {
+                return false;
+            }
+            String storedCode = c.getString(c.getColumnIndexOrThrow("verification_code"));
+            if (storedCode == null || !storedCode.equals(code)) {
+                return false;
+            }
+            long userId = c.getLong(c.getColumnIndexOrThrow("id"));
+            ContentValues v = new ContentValues();
+            v.put("verified", 1);
+            v.put("verification_code", (String) null);
+            return helper.getWritableDatabase().update(AppDbHelper.T_USERS, v, "id = ?",
+                    new String[]{String.valueOf(userId)}) > 0;
+        }
+    }
+
+    public boolean resendVerificationCode(String identifier) {
+        String code = getVerificationCode(identifier);
+        if (code == null) {
+            return false;
+        }
+        ContentValues v = new ContentValues();
+        v.put("verification_code", code);
+        return helper.getWritableDatabase().update(AppDbHelper.T_USERS, v, "username = ? OR email = ?",
+                new String[]{identifier, identifier}) > 0;
+    }
+
+    public boolean markVerified(long userId) {
+        ContentValues v = new ContentValues();
+        v.put("verified", 1);
+        return helper.getWritableDatabase().update(AppDbHelper.T_USERS, v, "id = ?",
+                new String[]{String.valueOf(userId)}) > 0;
+    }
+
+    public boolean resetPassword(long userId, String oldPassword, String newPassword) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.rawQuery("SELECT password FROM " + AppDbHelper.T_USERS + " WHERE id = ?",
+                new String[]{String.valueOf(userId)})) {
+            if (!c.moveToFirst() || !oldPassword.equals(c.getString(0))) {
+                return false;
+            }
+        }
+        ContentValues v = new ContentValues();
+        v.put("password", newPassword);
+        return helper.getWritableDatabase().update(AppDbHelper.T_USERS, v, "id = ?",
+                new String[]{String.valueOf(userId)}) > 0;
+    }
+
     public void logout() {
         session.clear();
+    }
+
+    public User findByUsernameOrEmail(String identifier) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        try (Cursor c = db.query(AppDbHelper.T_USERS,
+                new String[]{"id", "username", "email", "region", "avatar", "tokens", "stars"},
+                "username = ? OR email = ?", new String[]{identifier, identifier}, null, null, null)) {
+            if (c.moveToFirst()) {
+                return readUser(c);
+            }
+        }
+        return null;
     }
 
     private User findById(long id) {
@@ -58,18 +186,6 @@ public class UserRepository {
         return null;
     }
 
-    private User createDemoUser() {
-        ContentValues v = new ContentValues();
-        v.put("username", "Igrac123");
-        v.put("email", "igrac@email.com");
-        v.put("region", "Vojvodina");
-        v.put("avatar", 0);
-        v.put("tokens", 5);
-        v.put("stars", 120);
-        long id = helper.getWritableDatabase().insert(AppDbHelper.T_USERS, null, v);
-        return new User(id, "Igrac123", "igrac@email.com", "Vojvodina", 0, 5, 120);
-    }
-
     private User readUser(Cursor c) {
         return new User(
                 c.getLong(c.getColumnIndexOrThrow("id")),
@@ -79,5 +195,10 @@ public class UserRepository {
                 c.getInt(c.getColumnIndexOrThrow("avatar")),
                 c.getInt(c.getColumnIndexOrThrow("tokens")),
                 c.getInt(c.getColumnIndexOrThrow("stars")));
+    }
+
+    private String generateVerificationCode(String email) {
+        int hash = Math.abs((email + System.currentTimeMillis()).hashCode());
+        return String.format("%06d", hash % 1_000_000);
     }
 }

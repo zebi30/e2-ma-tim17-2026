@@ -22,6 +22,15 @@
     <string name="email_verification">Email potvrda</string>
     <string name="verify_email">Potvrdi email</string>
     <string name="verification_sent">Potvrda je poslata na tvoj email</string>
+    <string name="verification_code">Verifikacioni kod</string>
+    <string name="verification_not_found">Korisnik za verifikaciju nije pronađen</string>
+    <string name="verification_mail_subject">Potvrda email adrese</string>
+    <string name="verification_mail_body">Korisniče %1$s, tvoj verifikacioni kod je: %2$s</string>
+    <string name="verification_mail_ready">Verifikacioni email je spreman za %1$s</string>
+    <string name="verification_success">Email je uspešno potvrđen</string>
+    <string name="verification_failed">Verifikacija nije uspela</string>
+    <string name="email_app_missing">Nema aplikacije za slanje emaila</string>
+    <string name="account_not_verified">Nalog još nije potvrđen putem emaila</string>
 
     <!-- Notifications -->
     <string name="notifications">Notifikacije</string>
@@ -55,7 +64,7 @@
     <string name="game_over">Igra je gotova</string>
     <string name="step">Korak %d</string>
     <string name="hint">Nagoveštaj</string>
-    <string name="skocko_placeholder">•</string>
+    <string name="skocko_placeholder">∘</string>
     <string name="test_notification_title">Test notifikacija</string>
     <string name="test_notification_message">Ovo je probna notifikacija prikazana u KT1 tabeli notifikacija.</string>
     <string name="test_notification_time">Sada</string>
@@ -67,6 +76,7 @@
     <!-- Strings moved from layouts to remove hardcoded text warnings -->
     <string name="close_symbol">✕</string>
     <string name="time_label">Vreme:</string>
+    <string name="remaining_time_label">Preostalo vreme</string>
     <string name="time_30s">30s</string>
     <string name="time_70s">70s</string>
     <string name="time_60s">60s</string>
@@ -105,6 +115,21 @@
     <string name="ranking">Rangiranje</string>
     <string name="rewards">Nagrade</string>
     <string name="send_test_notification_button">Pošalji test notifikaciju</string>
+    <string name="send_verification_email">Pošalji potvrdu na email</string>
+    <string name="notification_chat_title">Nova poruka u četu</string>
+    <string name="notification_chat_message">Stigla je nova poruka od protivnika.</string>
+    <string name="notification_ranking_title">Promena u rangiranju</string>
+    <string name="notification_ranking_message">Napredovao si na tabeli i osvojio više mesta.</string>
+    <string name="notification_reward_title">Nova nagrada</string>
+    <string name="notification_reward_message">Dostupna ti je nova nagrada u profilu.</string>
+    <string name="notification_other_title">Obaveštenje</string>
+    <string name="notification_other_message">Imamo novu važnu informaciju za tebe.</string>
+    <string name="notification_open_details">Otvori detalje</string>
+    <string name="notification_send_one">Pošalji ovu notifikaciju</string>
+    <string name="notification_open_related">Otvori povezani ekran</string>
+    <string name="notification_mark_read">Označi kao pročitano</string>
+    <string name="notification_mark_unread">Označi kao nepročitano</string>
+    <string name="notification_filter_label">Filter</string>
     <string name="kt1_gui_test">KT 1 - GUI TEST</string>
     <string name="section_auth">1. Registracija i logovanje</string>
     <string name="main_btn_login">Login ekran</string>
@@ -112,8 +137,9 @@
     <string name="main_btn_password_reset">Reset lozinke</string>
     <string name="main_btn_email_verification">Email verifikacija</string>
     <string name="section_notifications">2. Notifikacije</string>
+    <string name="section_profile_notif">Profil i notifikacije</string>
     <string name="main_btn_notifications">Notifikacije ekran</string>
-    <string name="section_games">3. Igre</string>
+    <string name="section_games">Igre</string>
     <string name="main_btn_korak">Korak po korak</string>
     <string name="main_btn_moj_broj">Moj broj</string>
     <string name="main_btn_skocko">Skočko</string>
@@ -130,12 +156,74 @@
     <string name="op_minus">-</string>
     <string name="op_mul">*</string>
     <string name="op_div">/</string>
+    <string name="backspace_label">⌫ Obriši</string>
+    <string name="clear_label">Očisti sve</string>
+    <string name="invalid_token_order">Neispravan redosled – tu ne može da stoji taj simbol</string>
+    <string name="invalid_expression">Neispravan izraz</string>
+    <string name="moj_broj_won">Tačno! Pogodio si broj — +%1$d poena</string>
+    <string name="moj_broj_over">Kraj partije</string>
+    <string name="exit_game_title">Napustiti igru?</string>
+    <string name="exit_game_message">Da li ste sigurni da želite da napustite igru? Trenutni napredak neće biti sačuvan.</string>
+    <string name="exit_game_yes">Napusti</string>
+    <string name="exit_game_no">Ostani</string>
+    <string name="mb_hidden">\?</string>
+    <string name="mb_stop_show_target">STOP – prikaži traženi broj</string>
+    <string name="mb_stop_show_numbers">STOP – prikaži brojeve</string>
+    <string name="mb_phase_target">Runda %1$d / 2 — klikni STOP ili protresi telefon da prikažeš traženi broj</string>
+    <string name="mb_phase_numbers">Klikni STOP ili protresi telefon da dobiješ 6 brojeva</string>
+    <string name="mb_phase_play">Runda %1$d / 2 — sastavi izraz koji daje traženi broj</string>
+    <string name="mb_round_exact">Pogodio si traženi broj! +10 bodova.</string>
+    <string name="mb_round_closer">Tvoj rezultat je bliži — +5 bodova.</string>
+    <string name="mb_round_nothing">Nisi uneo ništa — 0 bodova ove runde.</string>
+    <string name="mb_round_opp_exact">Protivnik je pogodio traženi broj (+10 njemu).</string>
+    <string name="mb_round_opp_closer">Protivnikov rezultat je bliži (+5 njemu).</string>
+    <string name="mb_round_owner_tie">Isti rezultat — bodove dobija igrač čija je runda.</string>
+    <string name="mb_round_target_was">Nisi pogodio. Traženi broj je bio %1$d.</string>
+    <string name="wrong_try_next_hint">Netačno – evo sledećeg traga</string>
+    <string name="korak_won">Bravo! Tačan pojam je „%1$s\" — osvojio si %2$d poena</string>
+    <string name="korak_lost">Kraj igre. Tačan pojam je bio „%1$s\"</string>
+    <string name="skocko_your_guess">Tvoja kombinacija</string>
+    <string name="skocko_check">Proveri</string>
+    <string name="skocko_pick_full">Izaberi sva 4 simbola</string>
+    <string name="skocko_won">Pogodio si kombinaciju iz %1$d. pokušaja! +%2$d poena</string>
+    <string name="skocko_lost">Kraj igre. Rešenje: %1$s</string>
+    <string name="skocko_legend">🟥 simbol i pozicija   •   🟨 samo simbol</string>
+    <string name="skocko_sym_0">🤡</string>
+    <string name="skocko_sym_1">🟧</string>
+    <string name="skocko_sym_2">🔵</string>
+    <string name="skocko_sym_3">❤️</string>
+    <string name="skocko_sym_4">🔺</string>
+    <string name="skocko_sym_5">⭐</string>
+
+    <!-- Two-round / opponent flow (shared wording) -->
+    <string name="round_label">Runda %1$d / 2</string>
+    <string name="your_round">Tvoja runda</string>
+    <string name="opponent_round">Protivnikova runda</string>
+    <string name="opponent_playing">Protivnik igra svoju rundu…</string>
+    <string name="opponent_solved">Protivnik je pogodio i osvojio %1$d bodova.</string>
+    <string name="opponent_failed">Protivnik nije pogodio svoju kombinaciju.</string>
+    <string name="opp_steal_win">Protivnik je iskoristio tvoj promašaj i osvojio %1$d bodova.</string>
+    <string name="opp_steal_fail">Protivnik nije iskoristio tvoj promašaj.</string>
+    <string name="your_steal_chance">Protivnik nije pogodio! Imaš jednu priliku (10s) za %1$d bodova.</string>
+    <string name="your_steal_win">Pogodio si protivnikovu kombinaciju! +%1$d bodova.</string>
+    <string name="your_steal_fail">Nisi pogodio protivnikovu kombinaciju.</string>
+    <string name="match_result_title">Kraj partije</string>
+    <string name="match_result_message">Ti: %1$d bodova\nProtivnik: %2$d bodova</string>
+    <string name="next_round">Sledeća runda</string>
+    <string name="continue_match">Nastavi</string>
+    <string name="korak_steal_chance">Protivnik nije pogodio! Imaš jednu priliku (10s) za %1$d bodova.</string>
+    <string name="korak_term_label">Pojam koji se traži</string>
+    <string name="you_solved">Pogodio si u svojoj rundi! +%1$d bodova.</string>
+    <string name="you_failed_combo">Nisi pogodio svoju kombinaciju.</string>
+    <string name="you_failed_term">Nisi pogodio traženi pojam.</string>
+    <string name="one_attempt_left">Jedna prilika</string>
 
     <!-- Profile -->
     <string name="section_profile">2. Prikaz profila</string>
     <string name="main_btn_profile">Profil ekran</string>
     <string name="profile">Profil</string>
     <string name="change_avatar">Izmeni avatar</string>
+    <string name="change_password">Izmena lozinke</string>
     <string name="logout">Odjava</string>
     <string name="tokens_label">Tokeni</string>
     <string name="stars_label">Zvezde</string>
@@ -153,7 +241,7 @@
     <string name="sample_region">Vojvodina</string>
     <string name="statistics">Statistika</string>
     <string name="stat_avg_points">Prosečno bodova po igri: 25</string>
-    <string name="stat_kzz">Ko zna zna - tačno/netačno: 60% / 40%</string>
+    <string name="stat_kzz">Ko zna-zna - tačno/netačno: 60% / 40%</string>
     <string name="stat_moj_broj">Moj broj - pronađen broj: 70%</string>
     <string name="stat_korak">Korak po korak - pogođen pojam po koraku: 50%</string>
     <string name="stat_asocijacije">Asocijacije - rešene: 35%</string>
@@ -164,8 +252,8 @@
 
     <!-- Ko zna zna -->
     <string name="section_games_2">4. Nove igre</string>
-    <string name="ko_zna_zna">Ko zna zna</string>
-    <string name="main_btn_ko_zna_zna">Ko zna zna</string>
+    <string name="ko_zna_zna">Ko zna-zna</string>
+    <string name="main_btn_ko_zna_zna">Ko zna-zna</string>
     <string name="time_5s">5s</string>
     <string name="time_25s">25s</string>
     <string name="question_progress_initial">Pitanje 1 / 5</string>
@@ -202,7 +290,7 @@
     <string name="solution_b">Rešenje B</string>
     <string name="solution_c">Rešenje C</string>
     <string name="solution_d">Rešenje D</string>
-    <string name="cell_hidden">?</string>
+    <string name="cell_hidden">[?]</string>
     <string name="enter_solution">Unesite rešenje</string>
 
     <!-- Game flow / feedback (KT2) -->
@@ -215,7 +303,6 @@
     <string name="exit">Izađi</string>
     <string name="time_seconds">%ds</string>
     <string name="question_progress">Pitanje %1$d / %2$d</string>
-    <string name="round_label">Runda %1$d / %2$d</string>
 
     <!-- Spojnice -->
     <string name="spojnice_instruction">Poveži pojam iz leve sa pojmom iz desne kolone</string>
@@ -296,4 +383,36 @@
     <string name="stat_total_games_fmt">Ukupno odigranih partija: %1$d</string>
     <string name="stat_win_loss_fmt">Pobede / Porazi: %1$d%% / %2$d%%</string>
     <string name="stat_win_loss_no_data">Pobede / Porazi — nema podataka</string>
+
+    <!-- Password reset -->
+    <string name="must_be_logged_in">Morate biti prijavljeni da biste promenili lozinku</string>
+    <string name="password_reset_success">Lozinka je uspešno promenjena</string>
+    <string name="password_reset_failed">Promena lozinke nije uspela – proverite staru lozinku</string>
+
+    <!-- Notifications extra -->
+    <string name="notif_test_section">Pošalji test notifikaciju:</string>
+    <string name="notif_test_chat">💬 Chat</string>
+    <string name="notif_test_ranking">📊 Rang</string>
+    <string name="notif_test_rewards">🎁 Nagrade</string>
+    <string name="notif_test_other">🔔 Ostalo</string>
+    <string name="mark_all_read">Sve pročitano</string>
+    <string name="all_marked_read">Sve notifikacije su označene kao pročitane</string>
+
+    <string name="sending_email">Slanje emaila…</string>
+    <string name="email_sent">Email je poslat!</string>
+    <string name="email_send_failed">Slanje nije uspelo – proveri podešavanja pošiljaoca</string>
+    <string name="fill_all_fields">Popuni sva polja</string>
+    <string name="login_failed">Prijava nije uspela</string>
+    <string name="register_failed">Registracija nije uspela</string>
+    <string name="register_success">Registracija uspešna</string>
+    <string name="passwords_do_not_match">Lozinke se ne poklapaju</string>
+    <string name="login_success">Dobrodošao, %1$s</string>
+
+    <string-array name="regions">
+        <item>Vojvodina</item>
+        <item>Beograd</item>
+        <item>Šumadija i zapadna Srbija</item>
+        <item>Južna i istočna Srbija</item>
+        <item>Kosovo i Metohija</item>
+    </string-array>
 </resources>

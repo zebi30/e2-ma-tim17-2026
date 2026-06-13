@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -54,6 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
         statsService = new StatsService(new GameResultRepository(this));
 
         findViewById(R.id.change_avatar_button).setOnClickListener(v -> showAvatarPicker());
+        findViewById(R.id.change_password_button).setOnClickListener(v ->
+                startActivity(new Intent(this, PasswordResetActivity.class)));
         findViewById(R.id.logout_button).setOnClickListener(v -> logout());
 
         user = userRepository.getCurrentUser();
@@ -171,6 +174,9 @@ public class ProfileActivity extends AppCompatActivity {
     private void logout() {
         userRepository.logout();
         Toast.makeText(this, R.string.logged_out, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
     }
 }

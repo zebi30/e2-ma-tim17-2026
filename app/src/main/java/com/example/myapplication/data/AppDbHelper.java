@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AppDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "slagalica.db";
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 4;
 
     public static final String T_USERS = "users";
     public static final String T_QUESTIONS = "questions";
@@ -20,6 +20,7 @@ public class AppDbHelper extends SQLiteOpenHelper {
     public static final String T_ASSOC_SETS = "association_sets";
     public static final String T_ASSOC_COLUMNS = "association_columns";
     public static final String T_RESULTS = "game_results";
+    public static final String T_NOTIFICATIONS = "notifications";
 
     public AppDbHelper(Context context) {
         super(context.getApplicationContext(), DB_NAME, null, DB_VERSION);
@@ -29,9 +30,12 @@ public class AppDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + T_USERS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "username TEXT NOT NULL,"
-                + "email TEXT NOT NULL,"
+                + "username TEXT NOT NULL UNIQUE,"
+                + "email TEXT NOT NULL UNIQUE,"
                 + "region TEXT NOT NULL,"
+                + "password TEXT NOT NULL,"
+                + "verified INTEGER NOT NULL DEFAULT 0,"
+                + "verification_code TEXT,"
                 + "avatar INTEGER NOT NULL DEFAULT 0,"
                 + "tokens INTEGER NOT NULL DEFAULT 5,"
                 + "stars INTEGER NOT NULL DEFAULT 0)");
@@ -65,6 +69,15 @@ public class AppDbHelper extends SQLiteOpenHelper {
                 + "cell_4 TEXT NOT NULL,"
                 + "solution TEXT NOT NULL)");
 
+        db.execSQL("CREATE TABLE " + T_NOTIFICATIONS + " ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "user_id INTEGER NOT NULL,"
+                + "channel TEXT NOT NULL,"
+                + "title TEXT NOT NULL,"
+                + "message TEXT NOT NULL,"
+                + "is_read INTEGER NOT NULL DEFAULT 0,"
+                + "created_at INTEGER NOT NULL)");
+
         db.execSQL("CREATE TABLE " + T_RESULTS + " ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "user_id INTEGER NOT NULL,"
@@ -83,6 +96,7 @@ public class AppDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + T_NOTIFICATIONS);
         db.execSQL("DROP TABLE IF EXISTS " + T_RESULTS);
         db.execSQL("DROP TABLE IF EXISTS " + T_ASSOC_COLUMNS);
         db.execSQL("DROP TABLE IF EXISTS " + T_ASSOC_SETS);

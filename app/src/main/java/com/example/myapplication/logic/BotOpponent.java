@@ -67,4 +67,61 @@ public class BotOpponent {
     public int pickIndex(int bound) {
         return random.nextInt(bound);
     }
+
+    // ---------------------------------------------------------------------
+    // Skočko
+    // ---------------------------------------------------------------------
+
+    /** Attempt (1..6) at which the bot solves its own combo, or -1 if it fails. */
+    public int skockoSolveAttempt() {
+        double roll = random.nextDouble();
+        if (roll < 0.12) return 1;
+        if (roll < 0.26) return 2;
+        if (roll < 0.42) return 3;
+        if (roll < 0.56) return 4;
+        if (roll < 0.66) return 5;
+        if (roll < 0.74) return 6;
+        return -1; // ~26% chance the bot fails
+    }
+
+    /** Bot's single 10s steal attempt when the player failed their own combo. */
+    public boolean skockoStealSucceeds() {
+        return random.nextDouble() < 0.30;
+    }
+
+    // ---------------------------------------------------------------------
+    // Korak po korak
+    // ---------------------------------------------------------------------
+
+    /** Step (1..7) at which the bot solves its own term, or -1 if it fails. */
+    public int korakSolveStep() {
+        double roll = random.nextDouble();
+        if (roll < 0.05) return 1;
+        if (roll < 0.12) return 2;
+        if (roll < 0.23) return 3;
+        if (roll < 0.38) return 4;
+        if (roll < 0.54) return 5;
+        if (roll < 0.68) return 6;
+        if (roll < 0.80) return 7;
+        return -1; // ~20% chance the bot fails
+    }
+
+    /** Bot's single 10s steal attempt when the player failed their own term. */
+    public boolean korakStealSucceeds() {
+        return random.nextDouble() < 0.35;
+    }
+
+    // ---------------------------------------------------------------------
+    // Moj broj
+    // ---------------------------------------------------------------------
+
+    /** Whether the bot reaches the target exactly in its own round. */
+    public boolean mojBrojReachesTarget() {
+        return random.nextDouble() < 0.45;
+    }
+
+    /** When the bot does not reach the target, how far off its best result is. */
+    public int mojBrojDistance() {
+        return 1 + random.nextInt(40);
+    }
 }

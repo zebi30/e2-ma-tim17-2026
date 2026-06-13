@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,15 +12,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@color/primary">
 
         <Button
             android:id="@+id/back_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:text="@string/back_arrow"
-            android:textSize="24sp"
-            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             android:background="?attr/selectableItemBackground" />
 
         <TextView
@@ -27,10 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/notifications"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:paddingStart="16dp" />
+            android:textColor="@color/white"
+            android:paddingStart="8dp" />
+
+        <Button
+            android:id="@+id/mark_all_read_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mark_all_read"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_dark"
+            android:paddingHorizontal="12dp" />
 
     </LinearLayout>
 
@@ -39,7 +51,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
-        android:padding="8dp">
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="8dp"
+        android:background="@color/background_light">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -50,65 +64,149 @@
             <Button
                 android:id="@+id/filter_all"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:text="@string/all"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/primary"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="6dp" />
 
             <Button
                 android:id="@+id/filter_chat"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:text="@string/chat"
                 android:paddingHorizontal="16dp"
-                android:backgroundTint="@color/background"
+                android:backgroundTint="@color/divider"
                 android:textColor="@color/text_primary"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="6dp" />
 
             <Button
                 android:id="@+id/filter_ranking"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:text="@string/ranking"
                 android:paddingHorizontal="16dp"
-                android:backgroundTint="@color/background"
+                android:backgroundTint="@color/divider"
                 android:textColor="@color/text_primary"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="6dp" />
 
             <Button
                 android:id="@+id/filter_rewards"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:text="@string/rewards"
                 android:paddingHorizontal="16dp"
-                android:backgroundTint="@color/background"
+                android:backgroundTint="@color/divider"
                 android:textColor="@color/text_primary"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/filter_unread"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/filter_unread"
+                android:paddingHorizontal="16dp"
+                android:backgroundTint="@color/divider"
+                android:textColor="@color/text_primary"
+                android:layout_marginEnd="6dp" />
 
             <Button
                 android:id="@+id/filter_read"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:text="@string/filter_read"
                 android:paddingHorizontal="16dp"
-                android:backgroundTint="@color/background"
+                android:backgroundTint="@color/divider"
                 android:textColor="@color/text_primary" />
 
         </LinearLayout>
 
     </HorizontalScrollView>
 
-    <!-- Send test notification button -->
-    <Button
-        android:id="@+id/send_test_notification"
+    <!-- Test Notification Buttons -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:text="@string/send_test_notification_button"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notif_test_section"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_test_chat"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="@string/notif_test_chat"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/primary"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_test_ranking"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="@string/notif_test_ranking"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/success" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_test_rewards"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="@string/notif_test_rewards"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/text_primary"
+                app:backgroundTint="@color/warning"
+                android:layout_marginEnd="6dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_test_other"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="@string/notif_test_other"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/accent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <!-- Notifications List -->
     <ListView
@@ -123,7 +221,8 @@
     <LinearLayout
         android:id="@+id/empty_state"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone">
@@ -131,15 +230,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="🔔"
+            android:textSize="48sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/no_notifications"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 
 </LinearLayout>
-
-
-
-
-
