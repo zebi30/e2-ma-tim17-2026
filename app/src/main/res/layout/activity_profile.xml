@@ -244,13 +244,12 @@
                     android:textColor="@color/text_secondary"
                     android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:text="@string/qr_placeholder"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@color/divider"
+                <ImageView
+                    android:id="@+id/qr_image"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:contentDescription="@string/qr_code_label"
+                    android:background="@color/white"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
@@ -280,6 +279,7 @@
                     android:layout_marginBottom="12dp" />
 
                 <TextView
+                    android:id="@+id/stat_avg_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_avg_points"
@@ -287,6 +287,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_kzz_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_kzz"
@@ -294,6 +295,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_moj_broj_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_moj_broj"
@@ -301,6 +303,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_korak_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_korak"
@@ -308,6 +311,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_asocijacije_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_asocijacije"
@@ -315,6 +319,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_skocko_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_skocko"
@@ -322,6 +327,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_spojnice_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_spojnice"
@@ -329,6 +335,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_total_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_total_games"
@@ -336,6 +343,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_win_loss_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_win_loss"

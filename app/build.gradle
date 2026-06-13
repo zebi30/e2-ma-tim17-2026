@@ -38,6 +38,8 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.material
     implementation 'com.google.android.material:material:1.9.0'
+    // QR kod na profilu (poziv prijatelja skeniranjem)
+    implementation 'com.google.zxing:core:3.5.3'
     testImplementation libs.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.ext.junit
