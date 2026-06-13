@@ -25,4 +25,9 @@
     <color name="league_gold">#FFD700</color>
     <color name="league_silver">#C0C0C0</color>
     <color name="league_bronze">#CD7F32</color>
+
+    <!-- Skocko feedback pegs -->
+    <color name="peg_correct">#E53935</color>
+    <color name="peg_present">#FBC02D</color>
+    <color name="peg_absent">#CFD3D8</color>
 </resources>

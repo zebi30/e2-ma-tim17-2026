@@ -40,8 +40,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:minHeight="52dp"
                 android:hint="@string/email"
+                android:textColor="@color/text_primary"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -55,8 +57,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:minHeight="52dp"
                 android:hint="@string/username"
+                android:textColor="@color/text_primary"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -79,8 +83,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:minHeight="52dp"
                 android:hint="@string/password"
+                android:textColor="@color/text_primary"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,8 +102,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirm_password_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
+                android:minHeight="52dp"
                 android:hint="@string/confirm_password"
+                android:textColor="@color/text_primary"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

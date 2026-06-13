@@ -2,22 +2,24 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+def localProps = new Properties()
+def localPropsFile = rootProject.file("local.properties")
+if (localPropsFile.exists()) localProps.load(localPropsFile.newDataInputStream())
+
 android {
     namespace 'com.example.myapplication'
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdk 30
-        targetSdk 36
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "SENDER_EMAIL", "\"${localProps['SENDER_EMAIL'] ?: ''}\""
+        buildConfigField "String", "SENDER_APP_PASSWORD", "\"${localProps['SENDER_APP_PASSWORD'] ?: ''}\""
     }
 
     buildTypes {
@@ -25,6 +27,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        buildConfig true
+    }
+    packaging {
+        resources.excludes += ['META-INF/NOTICE.md', 'META-INF/LICENSE.md', 'META-INF/NOTICE', 'META-INF/LICENSE']
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -35,9 +43,13 @@ android {
 dependencies {
     implementation libs.activity.ktx
     implementation libs.appcompat
+    implementation 'com.sun.mail:android-mail:1.6.7'
+    implementation 'com.sun.mail:android-activation:1.6.7'
     implementation libs.constraintlayout
     implementation libs.material
     implementation 'com.google.android.material:material:1.9.0'
+    // QR kod na profilu (poziv prijatelja skeniranjem)
+    implementation 'com.google.zxing:core:3.5.3'
     testImplementation libs.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.ext.junit

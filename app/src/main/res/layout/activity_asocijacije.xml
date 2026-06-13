@@ -57,313 +57,366 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Grid: 4 columns x (4 cells + solution) -->
+    <include layout="@layout/view_player_bar" />
+
+    <!-- Runda i potez -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="4dp">
 
-        <!-- Column headers -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/col_a"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/col_b"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/col_c"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/col_d"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <!-- 4 rows of cells -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <Button
-                android:id="@+id/cell_a1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_b1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_c1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_d1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <Button
-                android:id="@+id/cell_a2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_b2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_c2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_d2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <Button
-                android:id="@+id/cell_a3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_b3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_c3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_d3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
-            <Button
-                android:id="@+id/cell_a4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_b4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_c4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-            <Button
-                android:id="@+id/cell_d4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/cell_hidden"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
-
-        <!-- Column solutions -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
-            <TextView
-                android:id="@+id/sol_a"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/solution_a"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@color/primary_dark" />
-            <TextView
-                android:id="@+id/sol_b"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/solution_b"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@color/primary_dark" />
-            <TextView
-                android:id="@+id/sol_c"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/solution_c"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@color/primary_dark" />
-            <TextView
-                android:id="@+id/sol_d"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:text="@string/solution_d"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@color/primary_dark" />
-        </LinearLayout>
-
-        <!-- Final solution input -->
         <TextView
+            android:id="@+id/round_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/final_solution_label"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:text="@string/round_value_initial"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:id="@+id/turn_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Polja: A i B gore, finalno u sredini, C i D dole -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp">
+            android:orientation="vertical"
+            android:padding="12dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <!-- Gornji red kolona: A i B (rešenje ispod polja) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Kolona A -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/col_a"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp" />
+
+                    <Button
+                        android:id="@+id/cell_a1"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_a2"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_a3"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_a4"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <TextView
+                        android:id="@+id/sol_a"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="@string/solution_a"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/primary_dark" />
+                </LinearLayout>
+
+                <!-- Kolona B -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/col_b"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp" />
+
+                    <Button
+                        android:id="@+id/cell_b1"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_b2"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_b3"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_b4"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <TextView
+                        android:id="@+id/sol_b"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="@string/solution_b"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/primary_dark" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Finalno rešenje (u sredini, malo deblje) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/final_solution_label"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp" />
+
+            <EditText
                 android:id="@+id/final_solution_input"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
                 android:hint="@string/enter_solution"
                 android:inputType="text"
                 android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
                 android:background="@color/background_light"
+                android:gravity="center"
                 android:padding="12dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Donji red kolona: C i D (rešenje iznad polja) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Kolona C -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/col_c"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/sol_c"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/solution_c"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/primary_dark" />
+
+                    <Button
+                        android:id="@+id/cell_c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_c2"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_c3"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_c4"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+                </LinearLayout>
+
+                <!-- Kolona D -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/col_d"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/sol_d"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/solution_d"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@color/primary_dark" />
+
+                    <Button
+                        android:id="@+id/cell_d1"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_d2"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_d3"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+
+                    <Button
+                        android:id="@+id/cell_d4"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/cell_hidden"
+                        android:textColor="@color/primary"
+                        android:backgroundTint="@color/background_light" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Dockovana dugmad: levo predaj potez, desno pošalji (uvek dostupna) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@color/primary_dark">
+
+        <Button
+            android:id="@+id/pass_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:text="@string/pass_turn"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/warning" />
 
         <Button
             android:id="@+id/submit_button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:text="@string/submit"
             android:textColor="@color/primary"
             android:backgroundTint="@color/background_light" />
@@ -381,12 +434,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/score_label"
+            android:text="@string/you_score_label"
             android:textSize="16sp"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score_zero"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/warning"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/opponent_score_label"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="24dp" />
+
+        <TextView
+            android:id="@+id/opponent_score_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score_zero"

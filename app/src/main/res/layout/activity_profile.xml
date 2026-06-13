@@ -20,21 +20,12 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/profile"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/logout_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/logout"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/white" />
         </LinearLayout>
 
         <!-- Avatar Card -->
@@ -97,6 +88,39 @@
                     android:textColor="@color/text_secondary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- Account actions: change password / logout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/change_password_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="@string/change_password"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/primary"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout_button"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/logout"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/error"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
 
         <!-- Stats row: tokens / stars -->
         <LinearLayout
@@ -244,13 +268,12 @@
                     android:textColor="@color/text_secondary"
                     android:layout_marginTop="8dp" />
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:text="@string/qr_placeholder"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@color/divider"
+                <ImageView
+                    android:id="@+id/qr_image"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:contentDescription="@string/qr_code_label"
+                    android:background="@color/white"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
@@ -280,6 +303,7 @@
                     android:layout_marginBottom="12dp" />
 
                 <TextView
+                    android:id="@+id/stat_avg_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_avg_points"
@@ -287,6 +311,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_kzz_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_kzz"
@@ -294,6 +319,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_moj_broj_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_moj_broj"
@@ -301,6 +327,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_korak_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_korak"
@@ -308,6 +335,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_asocijacije_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_asocijacije"
@@ -315,6 +343,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_skocko_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_skocko"
@@ -322,6 +351,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_spojnice_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_spojnice"
@@ -329,6 +359,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_total_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_total_games"
@@ -336,6 +367,7 @@
                     android:layout_marginBottom="6dp" />
 
                 <TextView
+                    android:id="@+id/stat_win_loss_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_win_loss"

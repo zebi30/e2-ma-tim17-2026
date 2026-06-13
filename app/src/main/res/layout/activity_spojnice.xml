@@ -57,130 +57,153 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Two columns -->
+    <include layout="@layout/view_player_bar" />
+
+    <!-- Runda i potez -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-        <!-- Left column -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/round_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/round_value_initial"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/turn_text"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginEnd="8dp">
-
-            <Button
-                android:id="@+id/left_1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/left_item_1"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/left_2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/left_item_2"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/left_3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/left_item_3"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/left_4"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/left_item_4"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/left_5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/left_item_5"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
-
-        <!-- Right column -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp">
-
-            <Button
-                android:id="@+id/right_1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/right_item_1"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/right_2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/right_item_2"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/right_3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/right_item_3"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/right_4"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/right_item_4"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light"
-                android:layout_marginBottom="8dp" />
-
-            <Button
-                android:id="@+id/right_5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/right_item_5"
-                android:textColor="@color/primary"
-                android:backgroundTint="@color/background_light" />
-        </LinearLayout>
+            android:gravity="end"
+            android:textColor="@color/white" />
     </LinearLayout>
+
+    <!-- Two columns (5 parova, skrolabilno) -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Left column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <Button
+                    android:id="@+id/left_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/left_item_1"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/left_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/left_item_2"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/left_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/left_item_3"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/left_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/left_item_4"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/left_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/left_item_5"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light" />
+            </LinearLayout>
+
+            <!-- Right column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <Button
+                    android:id="@+id/right_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/right_item_1"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/right_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/right_item_2"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/right_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/right_item_3"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/right_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/right_item_4"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/right_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="@string/right_item_5"
+                    android:textColor="@color/primary"
+                    android:backgroundTint="@color/background_light" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Score -->
     <LinearLayout
@@ -194,12 +217,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/score_label"
+            android:text="@string/you_score_label"
             android:textSize="16sp"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score_zero"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/warning"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/opponent_score_label"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="24dp" />
+
+        <TextView
+            android:id="@+id/opponent_score_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score_zero"

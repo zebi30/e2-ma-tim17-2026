@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,8 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,24 +26,24 @@
         </activity>
 
         <!-- Login/Registration Activities -->
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".PasswordResetActivity" />
-        <activity android:name=".EmailVerificationActivity" />
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait" />
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PasswordResetActivity" android:screenOrientation="portrait" />
+        <activity android:name=".EmailVerificationActivity" android:screenOrientation="portrait" />
 
         <!-- Game Activities -->
-        <activity android:name=".KorakPoKorakActivity" />
-        <activity android:name=".MojBrojActivity" />
-        <activity android:name=".SkockoActivity" />
-        <activity android:name=".KoZnaZnaActivity" />
-        <activity android:name=".SpojniceActivity" />
-        <activity android:name=".AsocijacijeActivity" />
+        <activity android:name=".KorakPoKorakActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MojBrojActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SkockoActivity" android:screenOrientation="portrait" />
+        <activity android:name=".KoZnaZnaActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SpojniceActivity" android:screenOrientation="portrait" />
+        <activity android:name=".AsocijacijeActivity" android:screenOrientation="portrait" />
 
         <!-- Profile Activity -->
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity" android:screenOrientation="portrait" />
 
         <!-- Notifications Activity -->
-        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".NotificationsActivity" android:screenOrientation="portrait" />
 
     </application>
 
