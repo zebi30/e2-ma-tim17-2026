@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AppDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "slagalica.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 3;
 
     public static final String T_USERS = "users";
     public static final String T_QUESTIONS = "questions";
@@ -144,18 +144,12 @@ public class AppDbHelper extends SQLiteOpenHelper {
         insertPair(db, 1, "Zdravko Čolić", "Ti si mi u krvi");
         insertPair(db, 1, "EKV", "Krug");
         insertPair(db, 1, "Bijelo Dugme", "Lipe cvatu");
-        insertPair(db, 1, "Parni Valjak", "Lutka za bal");
-        insertPair(db, 1, "Azra", "Balkan");
-        insertPair(db, 1, "Idoli", "Maljčiki");
         // Set 2: države i glavni gradovi
         insertPair(db, 2, "Francuska", "Pariz");
         insertPair(db, 2, "Italija", "Rim");
         insertPair(db, 2, "Španija", "Madrid");
         insertPair(db, 2, "Grčka", "Atina");
         insertPair(db, 2, "Nemačka", "Berlin");
-        insertPair(db, 2, "Portugal", "Lisabon");
-        insertPair(db, 2, "Austrija", "Beč");
-        insertPair(db, 2, "Mađarska", "Budimpešta");
     }
 
     private void insertPair(SQLiteDatabase db, long setId, String left, String right) {

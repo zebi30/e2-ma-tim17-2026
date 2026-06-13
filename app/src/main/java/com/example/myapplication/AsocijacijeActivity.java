@@ -23,6 +23,7 @@ import com.example.myapplication.logic.AsocijacijeEngine.Side;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.AssociationSet;
 import com.example.myapplication.model.GameResult;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class AsocijacijeActivity extends AppCompatActivity {
         contentRepository = new GameContentRepository(this);
         resultRepository = new GameResultRepository(this);
         userRepository = new UserRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         timerView = findViewById(R.id.timer);
         scoreView = findViewById(R.id.score_value);

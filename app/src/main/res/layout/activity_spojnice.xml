@@ -57,12 +57,15 @@
         </LinearLayout>
     </LinearLayout>
 
+    <include layout="@layout/view_player_bar" />
+
     <!-- Runda i potez -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
         <TextView
@@ -82,7 +85,7 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-    <!-- Two columns (8 parova, skrolabilno) -->
+    <!-- Two columns (5 parova, skrolabilno) -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -144,33 +147,6 @@
                     android:layout_height="56dp"
                     android:text="@string/left_item_5"
                     android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/left_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/left_item_1"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/left_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/left_item_2"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/left_8"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/left_item_3"
-                    android:textColor="@color/primary"
                     android:backgroundTint="@color/background_light" />
             </LinearLayout>
 
@@ -223,33 +199,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:text="@string/right_item_5"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/right_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/right_item_1"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/right_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/right_item_2"
-                    android:textColor="@color/primary"
-                    android:backgroundTint="@color/background_light"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/right_8"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/right_item_3"
                     android:textColor="@color/primary"
                     android:backgroundTint="@color/background_light" />
             </LinearLayout>

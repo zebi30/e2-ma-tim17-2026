@@ -19,6 +19,7 @@ import com.example.myapplication.data.UserRepository;
 import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.logic.KoZnaZnaEngine;
 import com.example.myapplication.model.GameResult;
+import com.example.myapplication.ui.PlayerBar;
 
 /**
  * Ko zna zna: 5 pitanja iz baze, 5 sekundi po pitanju, +10 / -5.
@@ -57,6 +58,7 @@ public class KoZnaZnaActivity extends AppCompatActivity {
         contentRepository = new GameContentRepository(this);
         resultRepository = new GameResultRepository(this);
         userRepository = new UserRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         timerView = findViewById(R.id.timer);
         progressView = findViewById(R.id.question_progress);

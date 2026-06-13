@@ -20,6 +20,7 @@ import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.logic.SpojniceEngine;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.SpojnicePair;
+import com.example.myapplication.ui.PlayerBar;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,6 +75,7 @@ public class SpojniceActivity extends AppCompatActivity {
         contentRepository = new GameContentRepository(this);
         resultRepository = new GameResultRepository(this);
         userRepository = new UserRepository(this);
+        PlayerBar.bind(this, userRepository.getCurrentUser());
 
         timerView = findViewById(R.id.timer);
         scoreView = findViewById(R.id.score_value);
@@ -83,13 +85,11 @@ public class SpojniceActivity extends AppCompatActivity {
 
         leftButtons = new Button[]{
                 findViewById(R.id.left_1), findViewById(R.id.left_2), findViewById(R.id.left_3),
-                findViewById(R.id.left_4), findViewById(R.id.left_5), findViewById(R.id.left_6),
-                findViewById(R.id.left_7), findViewById(R.id.left_8)
+                findViewById(R.id.left_4), findViewById(R.id.left_5)
         };
         rightButtons = new Button[]{
                 findViewById(R.id.right_1), findViewById(R.id.right_2), findViewById(R.id.right_3),
-                findViewById(R.id.right_4), findViewById(R.id.right_5), findViewById(R.id.right_6),
-                findViewById(R.id.right_7), findViewById(R.id.right_8)
+                findViewById(R.id.right_4), findViewById(R.id.right_5)
         };
 
         for (int i = 0; i < leftButtons.length; i++) {

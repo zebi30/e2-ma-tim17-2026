@@ -57,6 +57,8 @@
         </LinearLayout>
     </LinearLayout>
 
+    <include layout="@layout/view_player_bar" />
+
     <!-- Runda i potez -->
     <LinearLayout
         android:layout_width="match_parent"
