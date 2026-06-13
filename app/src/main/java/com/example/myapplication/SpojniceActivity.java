@@ -28,7 +28,7 @@ import java.util.Set;
 
 /**
  * Spojnice: 2 runde, svaku započinje po jedan igrač (spec. 2.a). Nakon što
- * igrač koji počinje prođe kroz svih pet pojmova, preostale pojmove povezuje
+ * igrač koji počinje prođe kroz sve pojmove, preostale pojmove povezuje
  * drugi igrač (spec. 2.c). Svaki povezan par nosi 2 boda. Igra se protiv
  * simuliranog protivnika; rezultat se upisuje u bazu za statistiku.
  */
@@ -83,11 +83,13 @@ public class SpojniceActivity extends AppCompatActivity {
 
         leftButtons = new Button[]{
                 findViewById(R.id.left_1), findViewById(R.id.left_2), findViewById(R.id.left_3),
-                findViewById(R.id.left_4), findViewById(R.id.left_5)
+                findViewById(R.id.left_4), findViewById(R.id.left_5), findViewById(R.id.left_6),
+                findViewById(R.id.left_7), findViewById(R.id.left_8)
         };
         rightButtons = new Button[]{
                 findViewById(R.id.right_1), findViewById(R.id.right_2), findViewById(R.id.right_3),
-                findViewById(R.id.right_4), findViewById(R.id.right_5)
+                findViewById(R.id.right_4), findViewById(R.id.right_5), findViewById(R.id.right_6),
+                findViewById(R.id.right_7), findViewById(R.id.right_8)
         };
 
         for (int i = 0; i < leftButtons.length; i++) {

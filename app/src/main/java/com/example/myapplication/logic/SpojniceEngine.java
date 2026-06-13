@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Stanje jedne runde spojnica: 5 parova, desna kolona izmešana.
+ * Stanje jedne runde spojnica: parovi sa izmešanom desnom kolonom.
  * Svaki povezan par nosi 2 boda (spec. 2.d).
  */
 public class SpojniceEngine {
