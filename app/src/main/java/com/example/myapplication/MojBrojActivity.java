@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.data.GameResultRepository;
 import com.example.myapplication.data.UserRepository;
@@ -56,6 +58,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private int playerExactRounds = 0;
 
     private final StringBuilder expression = new StringBuilder();
+    private final Deque<Integer> usedTiles = new ArrayDeque<>();
     private final Random random = new Random();
     private final BotOpponent bot = new BotOpponent();
     private CountDownTimer timer;
@@ -276,16 +279,37 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private void bindNumberButtons(GridLayout grid) {
         for (int i = 0; i < grid.getChildCount() && i < roundNumbers.length; i++) {
             Button button = (Button) grid.getChildAt(i);
+            int tileIndex = i;
             int number = roundNumbers[i];
-            button.setOnClickListener(v -> appendToken(String.valueOf(number)));
+            button.setOnClickListener(v -> appendNumber(tileIndex, number));
         }
     }
 
+    /** Each number tile may be used only once per round; a used tile is greyed out. */
+    private void appendNumber(int tileIndex, int value) {
+        if (phase != PHASE_PLAY) return;
+        String token = String.valueOf(value);
+        if (!isValidNext(token)) return;
+        appendRaw(token);
+        usedTiles.push(tileIndex);
+        setTileUsed(tileIndex, true);
+    }
+
+    private void setTileUsed(int tileIndex, boolean used) {
+        Button button = (Button) numbersGrid.getChildAt(tileIndex);
+        button.setEnabled(!used);
+        int color = used ? R.color.peg_absent : R.color.primary;
+        button.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, color)));
+        button.setAlpha(used ? 0.55f : 1f);
+    }
+
     private void setNumbersRevealed(boolean revealed) {
+        usedTiles.clear();
         for (int i = 0; i < numbersGrid.getChildCount() && i < roundNumbers.length; i++) {
             Button button = (Button) numbersGrid.getChildAt(i);
             button.setText(revealed ? String.valueOf(roundNumbers[i]) : getString(R.string.mb_hidden));
-            button.setEnabled(revealed);
+            setTileUsed(i, false);          // always restore original color/alpha
+            button.setEnabled(revealed);    // but only clickable once revealed
         }
     }
 
@@ -307,6 +331,10 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private void appendToken(String token) {
         if (phase != PHASE_PLAY) return;
         if (!isValidNext(token)) return; // silently ignore malformed order
+        appendRaw(token);
+    }
+
+    private void appendRaw(String token) {
         if (expression.length() > 0) expression.append(' ');
         expression.append(token);
         expressionView.setText(expression.toString());
@@ -315,14 +343,27 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
 
     private void removeLastToken() {
         String text = expression.toString().trim();
+        if (text.isEmpty()) return;
         int lastSpace = text.lastIndexOf(' ');
+        String last = lastSpace < 0 ? text : text.substring(lastSpace + 1);
         expression.setLength(0);
         if (lastSpace > 0) expression.append(text, 0, lastSpace);
+        // If we removed a number, free up (un-grey) the tile it came from.
+        if (isNumber(last) && !usedTiles.isEmpty()) {
+            int tileIndex = usedTiles.pop();
+            if (tileIndex < numbersGrid.getChildCount()) {
+                setTileUsed(tileIndex, false);
+            }
+        }
         refreshExpressionView();
     }
 
     private void clearExpression() {
         expression.setLength(0);
+        usedTiles.clear();
+        for (int i = 0; i < numbersGrid.getChildCount() && i < roundNumbers.length; i++) {
+            setTileUsed(i, false);
+        }
         refreshExpressionView();
     }
 
