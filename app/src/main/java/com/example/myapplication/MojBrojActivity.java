@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -15,10 +17,10 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.data.GameResultRepository;
 import com.example.myapplication.data.UserRepository;
-import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
 import com.example.myapplication.ui.PlayerBar;
@@ -28,11 +30,12 @@ import java.util.Deque;
 import java.util.Random;
 
 /**
- * Moj broj – 2 runde (2 x 1 min). Igrač u svakoj rundi: klikom na STOP (ili
- * protresanjem telefona) prvo otkriva traženi broj, pa zatim 6 brojeva (4
- * jednocifrena, jedan iz {10,15,20}, jedan iz {25,50,75,100}); ako ne klikne za
- * 5s, otkriva se automatski. Protivnik je simuliran ({@link BotOpponent}).
- * Bodovanje po specifikaciji: tačan broj = 10, inače bliži rezultat = 5,
+ * Moj broj – 2 runde (2 x 1 min) za dva igrača na istom uređaju (hot-seat).
+ * Rundu započinje njen vlasnik (runda 1 = Igrač 1, runda 2 = Igrač 2) klikom na
+ * STOP (ili protresanjem telefona): prvo se otkriva traženi broj, pa 6 brojeva
+ * (4 jednocifrena, jedan iz {10,15,20}, jedan iz {25,50,75,100}); ako se ne
+ * klikne za 5s, otkriva se automatski. Oba igrača zatim redom sastavljaju izraz
+ * nad istim brojevima. Bodovanje: tačan broj = 10, inače bliži rezultat = 5, a
  * kod istog rezultata bodove dobija igrač čija je runda. Max 20, min 0.
  */
 public class MojBrojActivity extends AppCompatActivity implements SensorEventListener {
@@ -49,23 +52,27 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private int[] roundNumbers;
     private int phase = PHASE_STOP_TARGET;
     private int roundIndex = 1;
-    private int playerScore = 0;
-    private int opponentScore = 0;
+    private int roundOwner = 1;
+    private int active = 1;
+    private int p1 = 0;
+    private int p2 = 0;
     private boolean finished = false;
-    private Integer playerResult = null;
-    private int playerExactRounds = 0;
+    private final Integer[] roundResults = new Integer[3]; // index 1 = player 1, 2 = player 2
 
     private final StringBuilder expression = new StringBuilder();
+    private final Deque<Integer> usedTiles = new ArrayDeque<>();
     private final Random random = new Random();
-    private final BotOpponent bot = new BotOpponent();
     private CountDownTimer timer;
 
     private TextView timerView;
     private TextView targetView;
     private TextView expressionView;
     private TextView resultView;
-    private TextView scoreView;
     private TextView statusText;
+    private TextView p1ScoreView;
+    private TextView p2ScoreView;
+    private View p1Chip;
+    private View p2Chip;
     private Button stopButton;
     private Button submitButton;
     private GridLayout numbersGrid;
@@ -90,8 +97,11 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         targetView = findViewById(R.id.target_number);
         expressionView = findViewById(R.id.expression_display);
         resultView = findViewById(R.id.result_display);
-        scoreView = findViewById(R.id.score_value);
         statusText = findViewById(R.id.status_text);
+        p1ScoreView = findViewById(R.id.p1_score);
+        p2ScoreView = findViewById(R.id.p2_score);
+        p1Chip = findViewById(R.id.p1_chip);
+        p2Chip = findViewById(R.id.p2_chip);
         stopButton = findViewById(R.id.stop_button);
         submitButton = findViewById(R.id.submit_button);
         numbersGrid = findViewById(R.id.numbers_grid);
@@ -123,12 +133,26 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         startRound(1);
     }
 
+    private int other(int player) {
+        return player == 1 ? 2 : 1;
+    }
+
+    private void renderScores() {
+        p1ScoreView.setText(String.valueOf(p1));
+        p2ScoreView.setText(String.valueOf(p2));
+        p1Chip.setBackgroundResource(active == 1 ? R.drawable.header_chip_active : R.drawable.header_chip);
+        p2Chip.setBackgroundResource(active == 2 ? R.drawable.header_chip_active : R.drawable.header_chip);
+    }
+
     // ----- Round lifecycle -----
 
     private void startRound(int index) {
         roundIndex = index;
+        roundOwner = index;
+        active = index;
         phase = PHASE_STOP_TARGET;
-        playerResult = null;
+        roundResults[1] = null;
+        roundResults[2] = null;
         expression.setLength(0);
         generateGame();
         bindNumberButtons(numbersGrid);
@@ -138,12 +162,12 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         targetView.setText(R.string.mb_hidden);
         expressionView.setText(R.string.expr_placeholder);
         resultView.setText(R.string.result_placeholder);
-        scoreView.setText(String.valueOf(playerScore));
         stopButton.setVisibility(Button.VISIBLE);
         stopButton.setEnabled(true);
         stopButton.setText(R.string.mb_stop_show_target);
         submitButton.setEnabled(false);
-        statusText.setText(getString(R.string.mb_phase_target, roundIndex));
+        statusText.setText(getString(R.string.mb_stop_owner, roundIndex, roundOwner));
+        renderScores();
         startTimer(5000);
     }
 
@@ -174,12 +198,25 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         } else if (phase == PHASE_STOP_NUMBERS) {
             setNumbersRevealed(true);
             setOperatorsEnabled(true);
-            submitButton.setEnabled(true);
             stopButton.setVisibility(Button.GONE);
-            phase = PHASE_PLAY;
-            statusText.setText(getString(R.string.mb_phase_play, roundIndex));
-            startTimer(60000);
+            playTurn(roundOwner);
         }
+    }
+
+    /** Starts a 1-minute build turn for the given player on the (already revealed) numbers. */
+    private void playTurn(int player) {
+        active = player;
+        phase = PHASE_PLAY;
+        expression.setLength(0);
+        usedTiles.clear();
+        expressionView.setText(R.string.expr_placeholder);
+        resultView.setText(R.string.result_placeholder);
+        setNumbersRevealed(true);
+        setOperatorsEnabled(true);
+        submitButton.setEnabled(true);
+        statusText.setText(getString(R.string.mb_turn, roundIndex, player));
+        renderScores();
+        startTimer(60000);
     }
 
     private void onSubmit() {
@@ -193,62 +230,67 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
             Toast.makeText(this, R.string.invalid_expression, Toast.LENGTH_SHORT).show();
             return;
         }
-        playerResult = value;
         resultView.setText(String.valueOf(value));
-        endRound();
+        endTurn(value);
     }
 
-    private void endRound() {
+    private void endTurn(Integer result) {
         if (timer != null) timer.cancel();
         if (phase == PHASE_DONE) return;
-        if (playerResult == null) {
-            playerResult = tryEvaluate(); // last-chance evaluate on timeout
+        roundResults[active] = result;
+        if (active == roundOwner) {
+            int next = other(roundOwner);
+            showTransition(getString(R.string.turn_handoff, next), () -> playTurn(next));
+        } else {
+            scoreRoundAndContinue();
         }
-        phase = PHASE_DONE;
+    }
 
-        String note = scoreRound(roundIndex == 1);
-        scoreView.setText(String.valueOf(playerScore));
+    /** Applies spec scoring for the finished round (both players have played). */
+    private void scoreRoundAndContinue() {
+        Integer r1 = roundResults[1];
+        Integer r2 = roundResults[2];
+        boolean p1Exact = r1 != null && r1 == target;
+        boolean p2Exact = r2 != null && r2 == target;
+        int d1 = r1 == null ? Integer.MAX_VALUE : Math.abs(target - r1);
+        int d2 = r2 == null ? Integer.MAX_VALUE : Math.abs(target - r2);
+
+        int add1 = 0;
+        int add2 = 0;
+        if (p1Exact) add1 = 10;
+        if (p2Exact) add2 = 10;
+        if (!p1Exact && !p2Exact) {
+            if (d1 == Integer.MAX_VALUE && d2 == Integer.MAX_VALUE) {
+                // neither entered anything -> 0 points
+            } else if (d1 < d2) {
+                add1 = 5;
+            } else if (d2 < d1) {
+                add2 = 5;
+            } else {
+                // equal distance -> the round owner gets the points
+                if (roundOwner == 1) add1 = 5; else add2 = 5;
+            }
+        }
+        p1 += add1;
+        p2 += add2;
+        active = 0; // no active player during the summary
+        renderScores();
+
+        String note = playerLine(1, r1, p1Exact) + "\n" + playerLine(2, r2, p2Exact)
+                + "\n" + getString(R.string.mb_round_points, add1, add2);
 
         if (roundIndex == 1) {
-            showTransition(note, () -> startRound(2));
+            showTransition(note + "\n\n" + getString(R.string.turn_handoff, 2), () -> startRound(2));
         } else {
+            phase = PHASE_DONE;
             showTransition(note, this::finishMatch);
         }
     }
 
-    /** Applies the spec scoring for one round and returns a short summary note. */
-    private String scoreRound(boolean playerOwnsRound) {
-        boolean playerExact = playerResult != null && playerResult == target;
-        if (playerExact) playerExactRounds++;
-        int playerDist = playerResult == null ? Integer.MAX_VALUE : Math.abs(target - playerResult);
-        boolean botExact = bot.mojBrojReachesTarget();
-        int botDist = botExact ? 0 : bot.mojBrojDistance();
-
-        int p = 0;
-        int o = 0;
-        if (playerExact) p = 10;
-        if (botExact) o = 10;
-        if (!playerExact && !botExact) {
-            if (playerDist < botDist) {
-                p = 5;
-            } else if (botDist < playerDist) {
-                o = 5;
-            } else if (playerDist != Integer.MAX_VALUE) {
-                if (playerOwnsRound) p = 5; else o = 5;
-            }
-        }
-        playerScore += p;
-        opponentScore += o;
-
-        StringBuilder sb = new StringBuilder();
-        if (playerExact) sb.append(getString(R.string.mb_round_exact));
-        else if (p == 5) sb.append(getString(R.string.mb_round_closer));
-        else if (playerResult == null) sb.append(getString(R.string.mb_round_nothing));
-        else sb.append(getString(R.string.mb_round_target_was, target));
-
-        if (botExact) sb.append("\n").append(getString(R.string.mb_round_opp_exact));
-        else if (o == 5) sb.append("\n").append(getString(R.string.mb_round_opp_closer));
-        return sb.toString();
+    private String playerLine(int player, Integer result, boolean exact) {
+        if (exact) return getString(R.string.mb_player_exact, player);
+        if (result == null) return getString(R.string.mb_player_none, player);
+        return getString(R.string.mb_player_result, player, result);
     }
 
     private void finishMatch() {
@@ -257,16 +299,18 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
         phase = PHASE_DONE;
         if (timer != null) timer.cancel();
 
-        boolean won = playerScore > opponentScore;
+        String winner = p1 > p2 ? getString(R.string.winner_player, 1)
+                : p2 > p1 ? getString(R.string.winner_player, 2)
+                : getString(R.string.winner_draw);
         User user = userRepository.getCurrentUser();
         if (user != null) {
-            resultRepository.insert(new GameResult(user.id, GameResult.GAME_MOJ_BROJ, playerScore, opponentScore,
-                    won, playerExactRounds, 2, System.currentTimeMillis()));
+            resultRepository.insert(new GameResult(user.id, GameResult.GAME_MOJ_BROJ, p1, p2,
+                    p1 >= p2, p1, p2, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle(R.string.match_result_title)
-                .setMessage(getString(R.string.match_result_message, playerScore, opponentScore))
+                .setMessage(getString(R.string.match_two, p1, p2, winner))
                 .setPositiveButton(android.R.string.ok, (d, w) -> finish())
                 .show();
     }
@@ -276,16 +320,40 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private void bindNumberButtons(GridLayout grid) {
         for (int i = 0; i < grid.getChildCount() && i < roundNumbers.length; i++) {
             Button button = (Button) grid.getChildAt(i);
+            int tileIndex = i;
             int number = roundNumbers[i];
-            button.setOnClickListener(v -> appendToken(String.valueOf(number)));
+            button.setOnClickListener(v -> appendNumber(tileIndex, number));
         }
+    }
+
+    /** Each number tile may be used only once per turn; a tile is disabled after use. */
+    private void appendNumber(int tileIndex, int value) {
+        if (phase != PHASE_PLAY) return;
+        String token = String.valueOf(value);
+        if (!isValidNext(token)) return;
+        appendRaw(token);
+        usedTiles.push(tileIndex);
+        setTileUsed(tileIndex, true);
+    }
+
+    /** Greys out a used tile (and disables it); restores it when freed. */
+    private void setTileUsed(int tileIndex, boolean used) {
+        Button button = (Button) numbersGrid.getChildAt(tileIndex);
+        button.setEnabled(!used);
+        int color = used ? R.color.peg_absent : R.color.primary;
+        button.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, color)));
+        button.setAlpha(used ? 0.55f : 1f);
     }
 
     private void setNumbersRevealed(boolean revealed) {
         for (int i = 0; i < numbersGrid.getChildCount() && i < roundNumbers.length; i++) {
             Button button = (Button) numbersGrid.getChildAt(i);
             button.setText(revealed ? String.valueOf(roundNumbers[i]) : getString(R.string.mb_hidden));
-            button.setEnabled(revealed);
+            if (revealed) {
+                setTileUsed(i, false); // fresh, fully usable
+            } else {
+                button.setEnabled(false);
+            }
         }
     }
 
@@ -307,6 +375,10 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
     private void appendToken(String token) {
         if (phase != PHASE_PLAY) return;
         if (!isValidNext(token)) return; // silently ignore malformed order
+        appendRaw(token);
+    }
+
+    private void appendRaw(String token) {
         if (expression.length() > 0) expression.append(' ');
         expression.append(token);
         expressionView.setText(expression.toString());
@@ -315,14 +387,27 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
 
     private void removeLastToken() {
         String text = expression.toString().trim();
+        if (text.isEmpty()) return;
         int lastSpace = text.lastIndexOf(' ');
+        String last = lastSpace < 0 ? text : text.substring(lastSpace + 1);
         expression.setLength(0);
         if (lastSpace > 0) expression.append(text, 0, lastSpace);
+        // If we removed a number, free up the tile it came from.
+        if (isNumber(last) && !usedTiles.isEmpty()) {
+            int tileIndex = usedTiles.pop();
+            if (tileIndex < numbersGrid.getChildCount()) {
+                setTileUsed(tileIndex, false);
+            }
+        }
         refreshExpressionView();
     }
 
     private void clearExpression() {
         expression.setLength(0);
+        usedTiles.clear();
+        for (int i = 0; i < numbersGrid.getChildCount() && i < roundNumbers.length; i++) {
+            setTileUsed(i, false);
+        }
         refreshExpressionView();
     }
 
@@ -445,7 +530,7 @@ public class MojBrojActivity extends AppCompatActivity implements SensorEventLis
                 if (phase == PHASE_STOP_TARGET || phase == PHASE_STOP_NUMBERS) {
                     stopPressed(); // auto-reveal after 5 seconds
                 } else if (phase == PHASE_PLAY) {
-                    endRound();
+                    endTurn(tryEvaluate());
                 }
             }
         }.start();

@@ -196,7 +196,7 @@
     <string name="skocko_sym_5">⭐</string>
 
     <!-- Two-round / opponent flow (shared wording) -->
-    <string name="round_label">Runda %1$d / 2</string>
+    <string name="round_label">Runda %1$d / %2$d</string>
     <string name="your_round">Tvoja runda</string>
     <string name="opponent_round">Protivnikova runda</string>
     <string name="opponent_playing">Protivnik igra svoju rundu…</string>
@@ -213,6 +213,27 @@
     <string name="continue_match">Nastavi</string>
     <string name="korak_steal_chance">Protivnik nije pogodio! Imaš jednu priliku (10s) za %1$d bodova.</string>
     <string name="korak_term_label">Pojam koji se traži</string>
+    <!-- Hot-seat (dva igrača na istom uređaju) -->
+    <string name="player1_short">Igrač 1</string>
+    <string name="player2_short">Igrač 2</string>
+    <string name="round_turn">Runda %1$d — na potezu Igrač %2$d</string>
+    <string name="turn_handoff">Na potezu je Igrač %1$d</string>
+    <string name="player_solved_pts">Igrač %1$d je pogodio! +%2$d bodova</string>
+    <string name="player_missed_combo">Igrač %1$d nije pogodio kombinaciju.</string>
+    <string name="player_missed_term">Igrač %1$d nije pogodio pojam.</string>
+    <string name="steal_turn_pts">Igrač %1$d, jedna prilika (10s) za %2$d bodova!</string>
+    <string name="steal_win_pts">Igrač %1$d je osvojio %2$d bodova!</string>
+    <string name="steal_none">Niko nije osvojio bonus poene.</string>
+    <string name="match_two">Igrač 1: %1$d bodova\nIgrač 2: %2$d bodova\n\n%3$s</string>
+    <string name="winner_player">Pobednik: Igrač %1$d 🏆</string>
+    <string name="winner_draw">Nerešeno!</string>
+    <string name="mb_turn">Runda %1$d — Igrač %2$d sastavlja izraz</string>
+    <string name="mb_stop_owner">Rundu %1$d započinje Igrač %2$d — klikni STOP ili protresi telefon</string>
+    <string name="mb_player_result">Igrač %1$d: rezultat %2$d</string>
+    <string name="mb_player_none">Igrač %1$d nije uneo ništa.</string>
+    <string name="mb_player_exact">Igrač %1$d je pogodio tačan broj!</string>
+    <string name="mb_round_points">Bodovi runde — Igrač 1: +%1$d, Igrač 2: +%2$d</string>
+
     <string name="you_solved">Pogodio si u svojoj rundi! +%1$d bodova.</string>
     <string name="you_failed_combo">Nisi pogodio svoju kombinaciju.</string>
     <string name="you_failed_term">Nisi pogodio traženi pojam.</string>

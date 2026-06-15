@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.data.GameResultRepository;
 import com.example.myapplication.data.UserRepository;
-import com.example.myapplication.logic.BotOpponent;
 import com.example.myapplication.model.GameResult;
 import com.example.myapplication.model.User;
 import com.example.myapplication.ui.PlayerBar;
@@ -26,10 +25,10 @@ import com.example.myapplication.ui.PlayerBar;
 import java.util.Random;
 
 /**
- * Skočko – 2 runde (2 x 30s). Igrač igra svoju rundu (runda 1), a protivnikova
- * runda (runda 2) je simulirana preko {@link BotOpponent}. Bodovanje po
- * specifikaciji: 1-2. pokušaj = 20, 3-4. = 15, 5-6. = 10. Ako vlasnik runde ne
- * pogodi, protivnik ima jednu priliku za 10 bodova. Max 40, min 0.
+ * Skočko – 2 runde (2 x 30s) za dva igrača na istom uređaju (hot-seat).
+ * Rundu 1 igra Igrač 1, rundu 2 Igrač 2. Bodovanje: 1-2. pokušaj = 20,
+ * 3-4. = 15, 5-6. = 10. Ako vlasnik runde ne pogodi, drugi igrač ima jednu
+ * priliku (10s) da osvoji 10 bodova. Max 40, min 0.
  */
 public class SkockoActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class SkockoActivity extends AppCompatActivity {
     private static final int MAX_ATTEMPTS = 6;
     private static final int STEAL_POINTS = 10;
 
-    private static final int PHASE_PLAYER = 0;
+    private static final int PHASE_OWNER = 0;
     private static final int PHASE_STEAL = 1;
     private static final int PHASE_DONE = 2;
 
@@ -46,21 +45,24 @@ public class SkockoActivity extends AppCompatActivity {
     private final String[] currentGuess = new String[LENGTH];
     private int filled = 0;
     private int currentAttempt = 0;
-    private int phase = PHASE_PLAYER;
-    private int playerScore = 0;
-    private int opponentScore = 0;
+    private int phase = PHASE_OWNER;
+    private int roundOwner = 1;
+    private int active = 1;
+    private int p1 = 0;
+    private int p2 = 0;
     private int lastPoints = 0;
     private boolean finished = false;
-    private boolean playerSolvedOwnRound = false;
 
     private final Random random = new Random();
-    private final BotOpponent bot = new BotOpponent();
     private CountDownTimer timer;
 
     private TextView statusText;
     private TextView attemptText;
-    private TextView scoreView;
     private TextView timerView;
+    private TextView p1ScoreView;
+    private TextView p2ScoreView;
+    private View p1Chip;
+    private View p2Chip;
     private TextView[] slots;
     private LinearLayout attemptsContainer;
     private UserRepository userRepository;
@@ -79,8 +81,11 @@ public class SkockoActivity extends AppCompatActivity {
         Button backspace = findViewById(R.id.backspace_button);
         statusText = findViewById(R.id.status_text);
         attemptText = findViewById(R.id.attempt_text);
-        scoreView = findViewById(R.id.score_value);
         timerView = findViewById(R.id.timer);
+        p1ScoreView = findViewById(R.id.p1_score);
+        p2ScoreView = findViewById(R.id.p2_score);
+        p1Chip = findViewById(R.id.p1_chip);
+        p2Chip = findViewById(R.id.p2_chip);
         attemptsContainer = findViewById(R.id.attempts_container);
         slots = new TextView[]{
                 findViewById(R.id.slot_0),
@@ -101,7 +106,11 @@ public class SkockoActivity extends AppCompatActivity {
         });
 
         bindSymbolButtons();
-        startPlayerRound();
+        startRound(1);
+    }
+
+    private int other(int player) {
+        return player == 1 ? 2 : 1;
     }
 
     private int pointsForAttempt(int attempt) {
@@ -110,23 +119,34 @@ public class SkockoActivity extends AppCompatActivity {
         return 10;
     }
 
+    private void award(int player, int pts) {
+        if (player == 1) p1 += pts; else p2 += pts;
+    }
+
     private void randomizeTarget() {
         for (int i = 0; i < LENGTH; i++) {
             target[i] = SYMBOLS[random.nextInt(SYMBOLS.length)];
         }
     }
 
-    // ----- Round 1: player -----
+    private void renderScores() {
+        p1ScoreView.setText(String.valueOf(p1));
+        p2ScoreView.setText(String.valueOf(p2));
+        p1Chip.setBackgroundResource(active == 1 ? R.drawable.header_chip_active : R.drawable.header_chip);
+        p2Chip.setBackgroundResource(active == 2 ? R.drawable.header_chip_active : R.drawable.header_chip);
+    }
 
-    private void startPlayerRound() {
-        phase = PHASE_PLAYER;
+    private void startRound(int owner) {
+        roundOwner = owner;
+        active = owner;
+        phase = PHASE_OWNER;
         randomizeTarget();
         currentAttempt = 0;
         clearGuess();
         attemptsContainer.removeAllViews();
-        statusText.setText(getString(R.string.round_label, 1) + " — " + getString(R.string.your_round));
+        statusText.setText(getString(R.string.round_turn, owner, owner));
         attemptText.setText(getString(R.string.attempt, 1));
-        scoreView.setText(String.valueOf(playerScore));
+        renderScores();
         startTimer(30000);
     }
 
@@ -142,99 +162,65 @@ public class SkockoActivity extends AppCompatActivity {
         addAttemptRow(currentGuess.clone(), exact, fb[1], currentAttempt + 1);
 
         if (phase == PHASE_STEAL) {
+            if (timer != null) timer.cancel();
             if (exact == LENGTH) {
-                playerScore += STEAL_POINTS;
-                scoreView.setText(String.valueOf(playerScore));
-                Toast.makeText(this, getString(R.string.your_steal_win, STEAL_POINTS), Toast.LENGTH_SHORT).show();
+                award(active, STEAL_POINTS);
+                renderScores();
+                Toast.makeText(this, getString(R.string.steal_win_pts, active, STEAL_POINTS), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, R.string.your_steal_fail, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.steal_none, Toast.LENGTH_SHORT).show();
             }
-            finishMatch();
+            afterRound();
             return;
         }
 
-        // PHASE_PLAYER
+        // PHASE_OWNER
         if (exact == LENGTH) {
+            if (timer != null) timer.cancel();
             lastPoints = pointsForAttempt(currentAttempt + 1);
-            playerScore += lastPoints;
-            playerSolvedOwnRound = true;
-            scoreView.setText(String.valueOf(playerScore));
-            playerRoundEnded(true);
+            award(active, lastPoints);
+            renderScores();
+            showTransition(getString(R.string.player_solved_pts, roundOwner, lastPoints), this::afterRound);
             return;
         }
         currentAttempt++;
         if (currentAttempt >= MAX_ATTEMPTS) {
-            playerRoundEnded(false);
+            ownerFailed();
             return;
         }
         clearGuess();
         attemptText.setText(getString(R.string.attempt, currentAttempt + 1));
     }
 
-    private void playerRoundEnded(boolean solved) {
+    private void ownerFailed() {
         if (timer != null) timer.cancel();
-        StringBuilder sb = new StringBuilder();
-        if (solved) {
-            sb.append(getString(R.string.you_solved, lastPoints));
-        } else {
-            sb.append(getString(R.string.you_failed_combo));
-            if (bot.skockoStealSucceeds()) {
-                opponentScore += STEAL_POINTS;
-                sb.append("\n").append(getString(R.string.opp_steal_win, STEAL_POINTS));
-            } else {
-                sb.append("\n").append(getString(R.string.opp_steal_fail));
-            }
-        }
-        showTransition(sb.toString(), this::opponentRound);
+        int stealer = other(roundOwner);
+        String msg = getString(R.string.player_missed_combo, roundOwner)
+                + "\n" + getString(R.string.turn_handoff, stealer);
+        showTransition(msg, () -> beginSteal(stealer));
     }
 
-    // ----- Round 2: opponent (simulated) -----
-
-    private void opponentRound() {
-        phase = PHASE_PLAYER; // not stealing yet
-        randomizeTarget();
-        currentAttempt = 0;
+    private void beginSteal(int stealer) {
+        phase = PHASE_STEAL;
+        active = stealer;
         clearGuess();
-        attemptsContainer.removeAllViews();
-        statusText.setText(getString(R.string.round_label, 2) + " — " + getString(R.string.opponent_round));
+        statusText.setText(getString(R.string.steal_turn_pts, stealer, STEAL_POINTS));
+        attemptText.setText(R.string.one_attempt_left);
+        renderScores();
+        startTimer(10000);
+    }
 
-        int botAttempt = bot.skockoSolveAttempt();
-        if (botAttempt > 0) {
-            simulateBotAttempts(botAttempt, true);
-            int pts = pointsForAttempt(botAttempt);
-            opponentScore += pts;
-            attemptText.setText("");
-            showTransition(getString(R.string.opponent_solved, pts), this::finishMatch);
+    private void afterRound() {
+        if (roundOwner == 1) {
+            active = 2;
+            renderScores();
+            showTransition(getString(R.string.turn_handoff, 2), () -> startRound(2));
         } else {
-            simulateBotAttempts(MAX_ATTEMPTS, false);
-            // player gets one steal attempt
-            phase = PHASE_STEAL;
-            clearGuess();
-            statusText.setText(getString(R.string.your_steal_chance, STEAL_POINTS));
-            attemptText.setText(R.string.one_attempt_left);
-            startTimer(10000);
+            finishMatch();
         }
     }
 
-    private void simulateBotAttempts(int count, boolean lastCorrect) {
-        for (int i = 0; i < count; i++) {
-            String[] guess = (lastCorrect && i == count - 1) ? target.clone() : randomWrongGuess();
-            int[] fb = feedback(guess, target);
-            addAttemptRow(guess, fb[0], fb[1], i + 1);
-        }
-    }
-
-    private String[] randomWrongGuess() {
-        String[] guess = new String[LENGTH];
-        do {
-            for (int i = 0; i < LENGTH; i++) {
-                guess[i] = SYMBOLS[random.nextInt(SYMBOLS.length)];
-            }
-        } while (feedback(guess, target)[0] == LENGTH);
-        return guess;
-    }
-
-    // ----- Shared helpers -----
+    // ----- Guess board -----
 
     /** Returns [exact (symbol+position), present (symbol only)]. */
     private int[] feedback(String[] guess, String[] solution) {
@@ -362,10 +348,10 @@ public class SkockoActivity extends AppCompatActivity {
 
     private void onTimeExpired() {
         if (phase == PHASE_STEAL) {
-            Toast.makeText(this, R.string.your_steal_fail, Toast.LENGTH_SHORT).show();
-            finishMatch();
-        } else if (phase == PHASE_PLAYER) {
-            playerRoundEnded(false);
+            Toast.makeText(this, R.string.steal_none, Toast.LENGTH_SHORT).show();
+            afterRound();
+        } else if (phase == PHASE_OWNER) {
+            ownerFailed();
         }
     }
 
@@ -384,16 +370,18 @@ public class SkockoActivity extends AppCompatActivity {
         phase = PHASE_DONE;
         if (timer != null) timer.cancel();
 
-        boolean won = playerScore > opponentScore;
+        String winner = p1 > p2 ? getString(R.string.winner_player, 1)
+                : p2 > p1 ? getString(R.string.winner_player, 2)
+                : getString(R.string.winner_draw);
         User user = userRepository.getCurrentUser();
         if (user != null) {
-            resultRepository.insert(new GameResult(user.id, GameResult.GAME_SKOCKO, playerScore, opponentScore,
-                    won, playerSolvedOwnRound ? 1 : 0, 1, System.currentTimeMillis()));
+            resultRepository.insert(new GameResult(user.id, GameResult.GAME_SKOCKO, p1, p2,
+                    p1 >= p2, p1, p2, System.currentTimeMillis()));
         }
         new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle(R.string.match_result_title)
-                .setMessage(getString(R.string.match_result_message, playerScore, opponentScore))
+                .setMessage(getString(R.string.match_two, p1, p2, winner))
                 .setPositiveButton(android.R.string.ok, (d, w) -> finish())
                 .show();
     }
@@ -404,6 +392,7 @@ public class SkockoActivity extends AppCompatActivity {
                 .setMessage(R.string.exit_game_message)
                 .setPositiveButton(R.string.exit_game_yes, (dialog, which) -> {
                     finished = true;
+                    phase = PHASE_DONE;
                     if (timer != null) timer.cancel();
                     finish();
                 })
